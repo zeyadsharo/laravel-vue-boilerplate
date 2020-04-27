@@ -1,7 +1,7 @@
 <template>
   <v-toolbar app fixed clipped-left>
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-    <v-toolbar-title>Laravel Vue Admin</v-toolbar-title>
+    <v-toolbar-title>Maintenance Admin</v-toolbar-title>
     <v-spacer></v-spacer>
 
     <v-menu
@@ -29,7 +29,7 @@
     <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
       <v-btn icon large flat slot="activator">
         <v-avatar size="30px">
-          <img src="https://via.placeholder.com/150" alt="Michael Wang">
+          <img  src="https://via.placeholder.com/150" alt="Michael Wang">
         </v-avatar>
       </v-btn>
       <v-list class="pa-0">
@@ -43,7 +43,7 @@
       <v-list class="pa-0">
         <v-list-tile @click="logout" ripple="ripple" rel="noopener">
           <v-list-tile-action>
-            <v-icon>account_circle</v-icon>
+            <v-icon color="red">fas fa-power-off</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Logout</v-list-tile-title>
