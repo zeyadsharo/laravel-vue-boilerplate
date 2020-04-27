@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <v-app id="inspire" light>
-      <v-navigation-drawer clipped fixed v-model="drawer" app>
+      <v-navigation-drawer   clipped fixed v-model="drawer" app>
         <sidebar></sidebar>
       </v-navigation-drawer>
 

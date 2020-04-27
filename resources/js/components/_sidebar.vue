@@ -1,5 +1,5 @@
 <template>
-  <v-list dense >
+  <v-list dense  >
     <v-list-tile exact to="/admin">
       <v-list-tile-action>
         <v-icon color="blue">fas fa-tachometer-alt</v-icon>
@@ -8,7 +8,7 @@
         <v-list-tile-title>Dashboard</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
-    <v-list-group no-action>
+    <v-list-group no-action >
       <v-list-tile slot="activator">
         <v-list-tile-action>
           <v-icon color="blue">fas fa-users</v-icon>

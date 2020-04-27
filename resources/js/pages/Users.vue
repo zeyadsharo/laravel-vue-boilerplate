@@ -1,19 +1,19 @@
 <template>
   <div>
-    <v-toolbar dark flat color="blue">
+    <v-toolbar dark flat color="#fd7e14">
       <v-toolbar-title>Users</v-toolbar-title>
       <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="700px">
-        <v-btn slot="activator" color="green" dark class="mb-2">New Item</v-btn>
+        <v-btn slot="activator" color="green" dark class="mb-2">New User</v-btn>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
           </v-card-title>
 
           <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
+            <v-container  grid-list-md>
+              <v-layout color="primary" wrap>
                 <v-flex xs12>
                   <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
                 </v-flex>
@@ -121,7 +121,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "New User" : "Edit User";
     }
   },
 
