@@ -45,5 +45,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class, 'author_id');
     }
+    public static function boot()           
+    {
+        parent::boot();
+        static::created(function($model){
+$admins=User::all()->filter(function ($user)
+{
+    return $user->hasRole('Admin');
+});
+        Notification::send($admins,new UserRegistered($model))  ;
+        });
+    }
 
 }
