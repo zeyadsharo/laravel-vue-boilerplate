@@ -1,5 +1,5 @@
 <template>
-  <v-list dense>
+  <v-list dense >
     <v-list-tile exact to="/admin">
       <v-list-tile-action>
         <v-icon color="blue">fas fa-tachometer-alt</v-icon>
