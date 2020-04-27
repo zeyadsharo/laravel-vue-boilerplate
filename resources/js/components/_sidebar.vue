@@ -70,7 +70,9 @@
 
 <script>
 export default {
-    
+
+
+
 }
 
 </script>
