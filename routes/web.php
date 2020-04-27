@@ -25,5 +25,5 @@ Route::get('/mark-all-read/{user}', function (User $user) {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Auth::routes();
 Route::any('/admin/{any?}', 'AdminController@index')->where('any','.*')->middleware('auth');
