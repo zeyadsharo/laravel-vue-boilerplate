@@ -4,26 +4,24 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-//for swwet alert 
+//for swwet alert
 
 import Swal from "sweetalert2";
 window.Swal = Swal;
 
+//for moment time
+import moment from "moment";
 
-
-
-
-
-require('./bootstrap');
-require('../sass/app.scss')
-window.Vue = require('vue');
- import Vuetify from 'vuetify'
+require("./bootstrap");
+require("../sass/app.scss");
+window.Vue = require("vue");
+import Vuetify from "vuetify";
 //  import Vuetify from '../plugins/vuetify'
-import VueRouter from 'vue-router'
-Vue.use(Vuetify)
-Vue.use(VueRouter)
-import 'vuetify/dist/vuetify.min.css'
-import Auth from './auth'
+import VueRouter from "vue-router";
+Vue.use(Vuetify);
+Vue.use(VueRouter);
+import "vuetify/dist/vuetify.min.css";
+import Auth from "./auth";
 
 Vue.prototype.$auth = new Auth(window.user);
 
@@ -37,48 +35,51 @@ Vue.prototype.$auth = new Auth(window.user);
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-import Home from './pages/home.vue'
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('admin', require('./components/Admin.vue').default);
-Vue.component('home', require('./pages/home.vue').default);
-import Dashboard from './pages/Dashboard'
-import Settings from './pages/Settings'
-import Users from './pages/Users'
-import Roles from './pages/Roles'
-import Permissions from './pages/Permissions'
-import Activities from './pages/Activities'
+import Home from "./pages/home.vue";
+Vue.component(
+    "example-component",
+    require("./components/ExampleComponent.vue").default
+);
+Vue.component("admin", require("./components/Admin.vue").default);
+Vue.component("home", require("./pages/home.vue").default);
+import Dashboard from "./pages/Dashboard";
+import Settings from "./pages/Settings";
+import Users from "./pages/Users";
+import Roles from "./pages/Roles";
+import Permissions from "./pages/Permissions";
+import Activities from "./pages/Activities";
 
-const routes = [{
-        path: '/admin/',
+const routes = [
+    {
+        path: "/admin/",
         component: Dashboard
     },
     {
-        path: '/admin/users',
+        path: "/admin/users",
         component: Users
     },
     {
-        path: '/admin/roles',
+        path: "/admin/roles",
         component: Roles
     },
     {
-        path: '/admin/permissions',
+        path: "/admin/permissions",
         component: Permissions
     },
     {
-        path: '/admin/settings',
+        path: "/admin/settings",
         component: Settings
     },
     {
-        path: '/admin/activities',
+        path: "/admin/activities",
         component: Activities
     }
 ];
 
 const router = new VueRouter({
-    mode: 'history',
+    mode: "history",
     routes
-})
-
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -86,13 +87,22 @@ const router = new VueRouter({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+//filter
+Vue.filter("upText", function(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+});
+
+Vue.filter("myDate", function(created) {
+    return moment(created)
+        .startOf("hour")
+        .fromNow();
+});
 
 const app = new Vue({
-    el: '#app',
-    vuetify:Vuetify,
+    el: "#app",
+    vuetify: Vuetify,
     router,
     components: {
         Home
-    },
-   
+    }
 });

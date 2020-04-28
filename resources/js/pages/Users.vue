@@ -81,9 +81,10 @@
       <template slot="items" slot-scope="props">
         <td>{{ props.item.name }}</td>
         <td class="text-xs-right">{{ props.item.email }}</td>
-        <td class="text-xs-right" v-if="props.item.role">{{ props.item.role.name }}</td>
+        <td class="text-xs-right" v-if="props.item.role">{{ props.item.role.name |upText }}</td>
         <td class="text-xs-right" v-else>n/a</td>
-        <td class="text-xs-right">{{ props.item.created_at }}</td>
+        <td class="text-xs-right">{{ props.item.created_at | myDate }}</td>
+        <td class="text-xs-right">{{ props.item.updated_at | myDate }}</td>
         <td class="justify-center layout px-0">
           <v-icon color="green" small class="mr-2" @click="editItem(props.item)">edit</v-icon>
           <v-icon
@@ -114,6 +115,7 @@ export default {
       { text: "Email", value: "email" },
       { text: "Role", value: "role" },
       { text: "Created", value: "created_at" },
+       { text: "Updated", value: "updated_at" },
       { text: "Actions", value: "name", sortable: false }
     ],
     tableData: [],
