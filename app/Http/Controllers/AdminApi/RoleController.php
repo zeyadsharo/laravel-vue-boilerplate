@@ -89,7 +89,6 @@ class RoleController extends Controller
         if ($request->has('permissions')) {
             $role->syncPermissions(collect($request->permissions)->pluck('id')->toArray());
         }
-
         return response(['message'=>'Role Updated']);
 
     }
