@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar  color="primary lighten-1" app fixed clipped-left>
+  <v-toolbar  color="primary darken-1" dart app fixed clipped-left>
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <v-toolbar-title>Maintenance Admin</v-toolbar-title>
     <v-spacer></v-spacer>

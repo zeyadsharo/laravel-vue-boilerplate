@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <v-app id="inspire" light>
-      <v-navigation-drawer   clipped fixed v-model="drawer" app>
+    <v-app id="inspire" dark>
+      <v-navigation-drawer clipped fixed v-model="drawer" app>
         <sidebar></sidebar>
       </v-navigation-drawer>
 
@@ -16,10 +16,9 @@
           </v-layout>
         </v-container>
       </v-content>
-      <!-- <v-footer app fixed>
+      <v-footer app fixed>
         <span>&copy; 2019</span>
-      </v-footer> -->
-       <Footer></Footer> 
+      </v-footer>
     </v-app>
   </div>
 </template>
@@ -27,10 +26,8 @@
 <script>
 import Sidebar from "./_sidebar";
 import Navbar from "./_navbar";
- import Footer from "./_footer";
-
 export default {
-  components: {Footer ,Sidebar, Navbar },
+  components: { Sidebar, Navbar },
   data: () => ({
     drawer: null
   }),

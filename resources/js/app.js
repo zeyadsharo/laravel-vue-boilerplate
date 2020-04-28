@@ -4,15 +4,25 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+//for swwet alert 
+
+import Swal from "sweetalert2";
+window.Swal = Swal;
+
+
+
+
+
+
 require('./bootstrap');
 require('../sass/app.scss')
-// window.Vue = require('vue');
-//  import Vuetify from 'vuetify'
- import Vuetify from '../plugins/vuetify'
+window.Vue = require('vue');
+ import Vuetify from 'vuetify'
+//  import Vuetify from '../plugins/vuetify'
 import VueRouter from 'vue-router'
-// Vue.use(Vuetify)
+Vue.use(Vuetify)
 Vue.use(VueRouter)
-// import 'vuetify/dist/vuetify.min.css'
+import 'vuetify/dist/vuetify.min.css'
 import Auth from './auth'
 
 Vue.prototype.$auth = new Auth(window.user);
