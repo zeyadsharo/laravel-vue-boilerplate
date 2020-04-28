@@ -1,5 +1,6 @@
 <template>
-  <v-app id="inspire">
+    <div id="app">
+    <v-app id="inspire" light>
     <!-- <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
         <v-list-item link>
@@ -166,6 +167,7 @@
       </v-row>
     </v-footer>
   </v-app>
+    </div>
 </template>
 
 <script>

@@ -6,18 +6,13 @@
 
 require('./bootstrap');
 require('../sass/app.scss')
-window.Vue = require('vue');
-
-import Vuetify from 'vuetify'
-//  Vuetify = require("vuetify").default
+// window.Vue = require('vue');
+//  import Vuetify from 'vuetify'
+ import Vuetify from '../plugins/vuetify'
 import VueRouter from 'vue-router'
-// import Vuetify from "../plugins/vuetify";
-Vue.use(Vuetify)
+// Vue.use(Vuetify)
 Vue.use(VueRouter)
-
-import 'vuetify/dist/vuetify.min.css'
-
-
+// import 'vuetify/dist/vuetify.min.css'
 import Auth from './auth'
 
 Vue.prototype.$auth = new Auth(window.user);
@@ -32,13 +27,10 @@ Vue.prototype.$auth = new Auth(window.user);
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 import Home from './pages/home.vue'
-
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('admin', require('./components/Admin.vue').default);
 Vue.component('home', require('./pages/home.vue').default);
-
 import Dashboard from './pages/Dashboard'
 import Settings from './pages/Settings'
 import Users from './pages/Users'
@@ -83,8 +75,14 @@ const router = new VueRouter({
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+
 const app = new Vue({
-    
     el: '#app',
-    router
-}).$mount("#app");
+    vuetify:Vuetify,
+    router,
+    components: {
+        Home
+    },
+   
+});
