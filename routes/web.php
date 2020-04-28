@@ -14,7 +14,7 @@
 use App\User;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.home');
 });
 
 Route::get('/mark-all-read/{user}', function (User $user) {
