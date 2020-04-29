@@ -2,8 +2,8 @@
 
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 $color-pack: false;
-// @import '~vuetify/src/styles/main.sass';
+//  @import '~vuetify/src/styles/main.sass';
+@import '~vuetify/dist/vuetify.min.css';

@@ -27,7 +27,7 @@ class User extends Authenticatable
 
     protected static $logAttributes = ['name', 'email','password'];
     protected static $logOnlyDirty = true;
-
+    public static $logFillable=true;
     protected static $logAttributesToIgnore = ['remember_token'];
     protected static $ignoreChangedAttributes = ['remember_token'];
 
@@ -45,14 +45,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class, 'author_id');
     }
+
+    
     public static function boot()           
     {
         parent::boot();
         static::created(function($model){
-$admins=User::all()->filter(function ($user)
-{
-    return $user->hasRole('Admin');
-});
+           $admins=User::all()->filter(function ($user)
+         {
+            return $user->hasRole('super-admin');
+        });
         Notification::send($admins,new UserRegistered($model))  ;
         });
     }

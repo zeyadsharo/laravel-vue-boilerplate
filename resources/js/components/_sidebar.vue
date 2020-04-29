@@ -28,7 +28,7 @@
 
       <v-list-tile to="/admin/roles">
         <v-list-tile-action>
-          <v-icon color="primary">fas fa-user-tag</v-icon>
+          <v-icon color="primary">fas fa-toolbox</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>Roles</v-list-tile-title>
@@ -37,7 +37,7 @@
 
       <v-list-tile to="/admin/permissions">
         <v-list-tile-action>
-          <v-icon color="#f783ac">fas fa-toolbox</v-icon>
+          <v-icon color="#f783ac">fas fa-key</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>Permissions</v-list-tile-title>

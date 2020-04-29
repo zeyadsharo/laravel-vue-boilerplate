@@ -16,7 +16,11 @@ require("./bootstrap");
 require("../sass/app.scss");
 window.Vue = require("vue");
 import Vuetify from "vuetify";
+// import Vuetify from 'vuetify/lib';
+// import 'vuetify/src/styles/main.sass'
+
 //  import Vuetify from '../plugins/vuetify'
+
 import VueRouter from "vue-router";
 Vue.use(Vuetify);
 Vue.use(VueRouter);
@@ -24,7 +28,6 @@ import "vuetify/dist/vuetify.min.css";
 import Auth from "./auth";
 
 Vue.prototype.$auth = new Auth(window.user);
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
