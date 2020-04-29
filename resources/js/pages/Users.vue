@@ -48,7 +48,7 @@
                   ></v-select>
                 </v-flex>
 
-                <v-flex xs12>
+                <v-flex xs12 v-if="false"  >
                   <v-select
                     v-model="editedItem.permissions"
                     :items="allPermissions"
