@@ -5,7 +5,14 @@
       <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
-        <v-btn slot="activator" rounded color="primary" dark class="mb-2">New User</v-btn>
+        <v-btn
+          slot="activator"
+          v-if="$auth.can('create user')"
+          rounded
+          color="primary"
+          dark
+          class="mb-2"
+        >New User</v-btn>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -64,43 +71,42 @@
         </v-card>
       </v-dialog>
     </v-toolbar>
-<v-card>
-
-  <v-card-title>
-      <v-spacer></v-spacer>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table :headers="headers" :search="search" :items="tableData" class="elevation-1">
-      <v-spacer></v-spacer>
-      <template slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">{{ props.item.email }}</td>
-        <td class="text-xs-right" v-if="props.item.role">{{ props.item.role.name |upText }}</td>
-        <td class="text-xs-right" v-else>n/a</td>
-        <td class="text-xs-right">{{ props.item.created_at | myDate }}</td>
-        <td class="text-xs-right">{{ props.item.updated_at | myDate }}</td>
-        <td class="justify-center layout px-0">
-          <v-icon color="green" small class="mr-2" @click="editItem(props.item)">edit</v-icon>
-          <v-icon
-            v-if="props.item.email!='zeyadsharo85@gmail.com'"
-            small
-            @click="deleteItem(props.item)"
-            color="red"
-          >delete</v-icon>
-        </td>
-      </template>
-      <template slot="no-data">
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
-      </template>
-    </v-data-table>
-
-</v-card>
+    <v-card >
+      <v-card-title>
+        <v-spacer></v-spacer>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
+      <v-data-table v-if="$auth.can('view users')" :headers="headers" :search="search" :items="tableData" class="elevation-1">
+        <v-spacer></v-spacer>
+        <template slot="items" slot-scope="props">
+          <td>{{ props.item.name }}</td>
+          <td class="text-xs-right">{{ props.item.email }}</td>
+          <td class="text-xs-right" v-if="props.item.role">{{ props.item.role.name |upText }}</td>
+          <td class="text-xs-right" v-else>n/a</td>
+          <td class="text-xs-right">{{ props.item.created_at | myDate }}</td>
+          <td class="text-xs-right">{{ props.item.updated_at | myDate }}</td>
+          <td class="justify-center layout px-0">
+            <v-icon color="green"  small class="mr-2" v-if="$auth.can('edit user')"  @click="editItem(props.item)">edit</v-icon>
+            <v-icon 
+              v-if="$auth.can('delete user')"
+              small
+            
+              @click="deleteItem(props.item)"
+              color="red"
+            >delete</v-icon>
+          </td>
+        </template>
+        <template slot="no-data">
+          <v-btn color="primary" @click="initialize">Reset</v-btn>
+        </template>
+      </v-data-table>
+    </v-card>
   </div>
 </template>
 
@@ -108,14 +114,14 @@
 export default {
   data: () => ({
     dialog: false,
-     search: '',
+    search: "",
     editdilaog: "save",
     headers: [
       { text: "Username", value: "name" },
       { text: "Email", value: "email" },
       { text: "Role", value: "role" },
       { text: "Created", value: "created_at" },
-       { text: "Updated", value: "updated_at" },
+      { text: "Updated", value: "updated_at" },
       { text: "Actions", value: "name", sortable: false }
     ],
     tableData: [],

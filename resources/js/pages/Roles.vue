@@ -9,8 +9,8 @@
             ></v-divider>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="700px">
-                <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
-                <v-card>
+                <v-btn slot="activator" v-if="$auth.can('create role')"  color="primary" dark class="mb-2">New Role</v-btn>
+                <v-card  > 
                     <v-card-title>
                         <span class="headline">{{ formTitle }}</span>
                     </v-card-title>
@@ -51,7 +51,7 @@
                 :items="tableData"
                 class="elevation-1"
         >
-            <template slot="items" slot-scope="props">
+            <template   v-if="$auth.can('view roles')" slot="items" slot-scope="props">
                 <td>{{ props.item.name }}</td>
                 <td style="width: 40%" v-if="props.item.permissions">
                     <v-chip
@@ -66,6 +66,7 @@
                 <td v-else>n/a</td>
                 <td class="justify-center layout px-0">
                     <v-icon
+                    v-if="$auth.can('edit role')"
                             small
                             class="mr-2"
                             @click="editItem(props.item)"
@@ -74,6 +75,7 @@
                     </v-icon>
                     <v-icon
                             small
+                             v-if="$auth.can('delete role')"
                             @click="deleteItem(props.item)"
                     >
                         delete
