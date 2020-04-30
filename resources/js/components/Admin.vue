@@ -16,8 +16,9 @@
           </v-layout>
         </v-container>
       </v-content>
-      <v-footer app fixed>
-        <span>&copy; 2019</span>
+  
+      <v-footer color="primary darken-1" app fixed>
+              <v-spacer></v-spacer> <span>&copy; 2019</span><v-spacer></v-spacer>
       </v-footer>
     </v-app>
   </div>

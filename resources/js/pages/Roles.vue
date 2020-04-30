@@ -5,15 +5,10 @@
       <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="700px">
-        <v-btn
-          slot="activator"
-          v-if="$auth.can('create role')"
-          color="primary"
-          dark
-          class="mb-2"
-        ><v-icon color="#fd7e14" >fas fa-plus-circle </v-icon> &nbsp;New Role</v-btn>
+        <v-btn slot="activator" v-if="$auth.can('create role')" color="primary" dark class="mb-2">
+          <v-icon color="#fd7e14">fas fa-plus-circle</v-icon>&nbsp;New Role
+        </v-btn>
         <v-card>
-          
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
           </v-card-title>
@@ -22,7 +17,7 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12>
-                  <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+                  <v-text-field :rules="nameRules" v-model="editedItem.name" label="Name" required></v-text-field>
                 </v-flex>
 
                 <v-flex xs12>
@@ -33,6 +28,8 @@
                     item-text="name"
                     return-object
                     multiple
+                    :rules="[v => !!v || 'Item is required']"
+                    required
                     chips
                   ></v-select>
                 </v-flex>
@@ -90,6 +87,12 @@ export default {
   data: () => ({
     dialog: false,
     editcon: false,
+    nameRules: [
+      v => !!v || "Name is required",
+      v =>
+        (v.length <= 14 && v.length >= 4) ||
+        "Name must be less than 14 and more than 4 characters"
+    ],
     headers: [
       { text: "Name", value: "name" },
       { text: "Permissions", value: "created_at" },
@@ -179,17 +182,36 @@ export default {
 
         axios
           .put("/api/roles/" + this.editedItem.id, this.editedItem)
-          .then(response => this.alert(" Role Updated"));
+          .then(response => this.alert(" Role was Updated"))
+          .catch(function() {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!"
+            });
+          });
       } else {
-        this.tableData.push(this.editedItem);
+        // this.tableData.push(this.editedItem);
 
         axios
           .post("/api/roles", this.editedItem)
-          .then(response => this.alert(" New Role Created"));
+          .then(response =>
+            this.alert(" New Role Was Created", this.editedItem)
+          )
+          .catch(function() {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              footer:
+                "Try to insert field correctly <br/> and make sure the Role is not Duplicate"
+            });
+          });
       }
-      this.close();
+      // this.close();
     },
-    alert(item) {
+    alert(item, editedItem) {
+      this.tableData.push(editedItem);
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -197,6 +219,7 @@ export default {
         showConfirmButton: false,
         timer: 1500
       });
+      this.close();
     }
   }
 };

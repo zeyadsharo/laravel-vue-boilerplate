@@ -5,7 +5,6 @@
       <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
-        
         <v-btn
           slot="activator"
           v-if="$auth.can('create user')"
@@ -13,7 +12,9 @@
           color="primary"
           dark
           class="mb-2"
-        >  <v-icon color="#fd7e14" >fas fa-user-plus </v-icon> &nbsp; New User</v-btn>
+        >
+          <v-icon color="#fd7e14">fas fa-user-plus</v-icon>&nbsp; New User
+        </v-btn>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -23,18 +24,27 @@
             <v-container grid-list-md>
               <v-layout color="primary" wrap>
                 <v-flex xs12>
-                  <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+                  <v-text-field :rules="nameRules" v-model="editedItem.name" label="Name" required></v-text-field>
                 </v-flex>
                 <v-flex xs12>
-                  <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.email"
+                    :rules="emailRules"
+                    label="Email"
+                    required
+                  ></v-text-field>
                 </v-flex>
 
                 <v-flex xs12>
-                  <v-text-field v-model="editedItem.password" label="password"></v-text-field>
+                  <v-text-field v-model="editedItem.password" label="password" required></v-text-field>
                 </v-flex>
 
                 <v-flex xs12>
-                  <v-text-field v-model="editedItem.confirm_password" label="Confirm Password"></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.confirm_password"
+                    label="Confirm Password"
+                    required
+                  ></v-text-field>
                 </v-flex>
 
                 <v-flex xs12>
@@ -125,10 +135,24 @@
 </template>
 
 <script>
+class Errors {
+  constructor() {
+    this.errors = {};
+  }
+}
 export default {
   data: () => ({
     dialog: false,
     search: "",
+    error: "",
+    nameRules: [
+      v => !!v || "Name is required",
+      v => v.length <= 14 || "Name must be less than 10 characters"
+    ],
+    emailRules: [
+      v => !!v || "E-mail is required",
+      v => /.+@.+/.test(v) || "E-mail must be valid"
+    ],
     editdilaog: "save",
     headers: [
       { text: "Username", value: "name" },
@@ -238,14 +262,38 @@ export default {
         Object.assign(this.tableData[this.editedIndex], this.editedItem);
         axios
           .put("/api/users/" + this.editedItem.id, this.editedItem)
-          .then(response => this.alert("User Updated"));
+          .then(response => this.alertandpush("User  Was Updated",));
       } else {
-        this.tableData.push(this.editedItem);
-        axios
-          .post("/api/users/", this.editedItem)
-          .then(response => this.alert("New User Created"));
+        // this.tableData.push(this.editedItem),
+          axios
+            .post("/api/users/", this.editedItem)
+            .then(response => this.alertandpush("User Was Created",this.editedItem))
+            .catch(function(error) {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                footer:
+                  "Try to insert field correctly <br/> and make sure the email is not Duplicate"
+              });
+            });
       }
-      this.close();
+    },
+    alertandpush(item,editedItem) {
+      
+      if (editedItem!=null)
+      {
+         this.tableData.push(editedItem);
+      }
+     
+       Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: item,
+        showConfirmButton: false,
+        timer: 1500
+      });
+        this.close();
     },
     alert(item) {
       Swal.fire({
@@ -255,6 +303,7 @@ export default {
         showConfirmButton: false,
         timer: 1500
       });
+      this.close();
     }
   }
 };
