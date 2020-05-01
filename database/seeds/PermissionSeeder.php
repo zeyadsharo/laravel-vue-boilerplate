@@ -35,7 +35,7 @@ class PermissionSeeder extends Seeder
 
    $permission = array("create user","edit user","delete user"
    ,"view users", "view roles" ,"create role","edit role","delete role",
-   "view permissions " ,"add permission"
+   "view permissions" ,"add permission"
    );
 
    foreach ($permission as $value) {

@@ -26,32 +26,74 @@
             <v-container grid-list-md>
               <v-layout color="primary" wrap>
                 <v-flex xs12>
-                  <v-text-field :rules="nameRules" v-model="editedItem.name" label="Name" required></v-text-field>
+                  <v-text-field
+                    label="Name"
+                    placeholder="Enter User name"
+                    filled
+                    rounded
+                    dense
+                    prepend-icon="fas fa-toolbox"
+                    :rules="nameRules"
+                    v-model="editedItem.name"
+                    required
+                  ></v-text-field>
                 </v-flex>
                 <v-flex xs12>
                   <v-text-field
                     v-model="editedItem.email"
                     :rules="emailRules"
-                    label="Email"
+                    label="Enter vaild Email"
+                    prepend-icon="mdi-email"
                     required
+                    filled
+                    rounded
+                    dense
                   ></v-text-field>
                 </v-flex>
 
                 <v-flex xs12>
-                  <v-text-field v-model="editedItem.password" label="password" required></v-text-field>
+                  <v-text-field
+                    v-model="editedItem.password"
+                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :rules="[rules.required, rules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    label="Enter the Password"
+                    hint="At least 8 characters"
+                    counter
+                    @click:append="show1 = !show1"
+                    filled
+                    rounded
+                    dense
+                    prepend-icon="mdi-key"
+                  ></v-text-field>
                 </v-flex>
 
                 <v-flex xs12>
                   <v-text-field
                     v-model="editedItem.confirm_password"
-                    label="Confirm Password"
-                    required
+                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :rules="[rules.required, rules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    label="Confirm the Password"
+                    hint="At least 8 characters"
+                    counter
+                    @click:append="show1 = !show1"
+                    filled
+                    rounded
+                    dense
+                    prepend-icon="mdi-key"
                   ></v-text-field>
                 </v-flex>
 
                 <v-flex xs12>
                   <h3>Roles</h3>
                   <v-select
+                    filled
+                    rounded
+                    dense
+                    prepend-icon="fas fa-toolbox"
                     v-model="editedItem.role"
                     :items="allRoles"
                     label="Roles"
@@ -61,7 +103,7 @@
                   ></v-select>
                 </v-flex>
 
-                <v-flex xs12 v-if="false">
+                <!-- <v-flex xs12 v-if="false">
                   <v-select
                     v-model="editedItem.permissions"
                     :items="allPermissions"
@@ -71,14 +113,14 @@
                     multiple
                     chips
                   ></v-select>
-                </v-flex>
+                </v-flex>-->
               </v-layout>
             </v-container>
           </v-card-text>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+            <v-btn color="red darken-1" text @click="close">Cancel</v-btn>
             <v-btn color="blue" text @click="save">{{editdilaog}}</v-btn>
           </v-card-actions>
         </v-card>
@@ -95,10 +137,15 @@
           hide-details
         ></v-text-field>
       </v-card-title>
-      <v-data-table :headers="headers" :items="tableData" class="elevation-1">
+      <v-data-table
+        v-if="$auth.can('view users')"
+        :headers="headers"
+        :items="tableData"
+        class="elevation-1"
+      >
         <template v-slot:item.name="{ item }">
           <!-- <v-chip color="red" outlined dark>{{ item.name }}</v-chip> -->
-          <v-chip pill v-on="on">
+          <v-chip pill>
             <v-avatar left>
               <!-- <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img> -->
               <v-icon color="green" small>fas fa-user</v-icon>
@@ -144,9 +191,9 @@
             >fas fa-trash</v-icon>
           </td>
         </template>
-         <template slot="no-data">
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
-      </template>
+        <template slot="no-data">
+          <v-btn color="primary" @click="initialize">Reset</v-btn>
+        </template>
       </v-data-table>
     </v-card>
   </div>
@@ -160,9 +207,18 @@ class Errors {
 }
 export default {
   data: () => ({
+    // for password
+    show1: false,
+    show2: true,
+    show3: false,
+    show4: false,
     dialog: false,
     search: "",
     error: "",
+    rules: {
+      required: value => !!value || "Required.",
+      min: v => v.length >= 8 || "Min 8 characters",
+    },
     nameRules: [
       v => !!v || "Name is required",
       v => v.length <= 14 || "Name must be less than 10 characters"

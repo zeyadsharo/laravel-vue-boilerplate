@@ -30,7 +30,12 @@
                 </v-card>
       </v-dialog>-->
     </v-toolbar>
-    <v-data-table :headers="headers" :items="tableData" class="elevation-1">
+    <v-data-table
+      v-if="$auth.can('view permissions')"
+      :headers="headers"
+      :items="tableData"
+      class="elevation-2"
+    >
       <template v-slot:item.name="{ item }">
         <v-chip :color="getColor(item.name)" dark>{{ item.name }}</v-chip>
       </template>
@@ -42,10 +47,7 @@
 export default {
   data: () => ({
     dialog: false,
-    headers: [
-      { text: "Permissions", value: "name" }
-      // {text: 'Actions', value: 'name', sortable: false},
-    ],
+    headers: [{ text: "Permissions", value: "name" }],
     tableData: [],
     editedIndex: -1,
     allPermissions: [],
@@ -111,9 +113,9 @@ export default {
         this.editedIndex = -1;
       }, 300);
     },
-    getColor (calories) {
-        return 'green'
-      },
+    getColor(calories) {
+      return "green";
+    },
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.tableData[this.editedIndex], this.editedItem);

@@ -46,18 +46,7 @@
     <v-menu left bottom>
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on" @click="markAsRead" text>
-          <!-- <v-badge color="red" overlap>
-          <span slot="badge">{{unreadNotifications.length}}</span>
-          <v-icon medium>far fa-bell</v-icon>
-          </v-badge>-->
-          <v-badge
-            :content="unreadNotifications.length"
-            :value="unreadNotifications.length"
-            color="red"
-            overlap
-          >
             <v-icon>far fa-user</v-icon>
-          </v-badge>
         </v-btn>
       </template>
 

@@ -7,7 +7,7 @@
       <v-dialog v-model="dialog" max-width="700px">
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" v-if="$auth.can('create role')" color="primary" dark class="mb-2">
-            <v-icon  color="#fd7e14">fas fa-plus-circle</v-icon>&nbsp;New Role
+            <v-icon color="#fd7e14">fas fa-plus-circle</v-icon>&nbsp;New Role
           </v-btn>
         </template>
         <v-card>
@@ -19,11 +19,24 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12>
-                  <v-text-field :rules="nameRules" v-model="editedItem.name" label="Name" required></v-text-field>
+                  <v-text-field
+                    label="Name"
+                    placeholder="Enter User name"
+                    filled
+                    rounded
+                    dense
+                    prepend-icon="mdi-text"
+                    :rules="nameRules"
+                    v-model="editedItem.name"
+                    required
+                  ></v-text-field>
                 </v-flex>
 
                 <v-flex xs12>
-                  <v-select
+                  
+                    <v-select
+                  
+                 
                     v-model="editedItem.permissions"
                     :items="allPermissions"
                     label="Permissions"
@@ -33,6 +46,10 @@
                     :rules="[v => !!v || 'Item is required']"
                     required
                     chips
+                      filled
+                    rounded
+                    dense
+                    prepend-icon="fas fa-toolbox"
                   ></v-select>
                 </v-flex>
               </v-layout>
@@ -41,7 +58,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+            <v-btn color="red darken-1" text @click="close">Cancel</v-btn>
             <v-btn color="blue darken-1" text v-if="editcon" @click="save">Edit</v-btn>
             <v-btn color="blue darken-1" text v-else @click="save">Save</v-btn>
           </v-card-actions>
