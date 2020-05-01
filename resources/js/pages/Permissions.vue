@@ -31,29 +31,8 @@
       </v-dialog>-->
     </v-toolbar>
     <v-data-table :headers="headers" :items="tableData" class="elevation-1">
-      <template slot="items" slot-scope="props">
-        <!-- <td :color="red">{{ props.item.name }}</td> -->
-        <td>
-           <v-chip :color="getColor(props.item.name)" dark>{{ props.item.name }}</v-chip>
-        </td>
-        <!-- <td class="justify-center layout px-0">
-                    <v-icon
-                            small
-                            class="mr-2"
-                            @click="editItem(props.item)"
-                    >
-                        edit
-                    </v-icon>
-                    <v-icon
-                            small
-                            @click="deleteItem(props.item)"
-                    >
-                        delete
-                    </v-icon>
-        </td>-->
-      </template>
-      <template slot="no-data">
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      <template v-slot:item.name="{ item }">
+        <v-chip :color="getColor(item.name)" dark>{{ item.name }}</v-chip>
       </template>
     </v-data-table>
   </div>
@@ -103,11 +82,11 @@ export default {
         this.allPermissions = this.tableData;
       });
     },
-    getColor (calories) {
-        // if (calories > 400) return 'red'
-        // else if (calories > 200) return 'orange'
-         return 'green'
-      },
+    getColor(calories) {
+      // if (calories > 400) return 'red'
+      // else if (calories > 200) return 'orange'
+      return "green";
+    },
 
     editItem(item) {
       this.editedIndex = this.tableData.indexOf(item);
@@ -132,7 +111,9 @@ export default {
         this.editedIndex = -1;
       }, 300);
     },
-
+    getColor (calories) {
+        return 'green'
+      },
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.tableData[this.editedIndex], this.editedItem);

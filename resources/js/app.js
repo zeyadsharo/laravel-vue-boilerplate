@@ -25,7 +25,7 @@ Vue.use(Vuetify);
 window.Vue = require("Vue");
 // import Vuetify from "vuetify";
 // import Vuetify from 'vuetify/lib';
- import 'vuetify/src/styles/main.sass'
+import 'vuetify/src/styles/main.sass'
 
 import Vuetify from '../plugins/vuetify'
 import VueRouter from "vue-router";
@@ -59,8 +59,7 @@ import Roles from "./pages/Roles";
 import Permissions from "./pages/Permissions";
 import Activities from "./pages/Activities";
 
-const routes = [
-    {
+const routes = [{
         path: "/admin/",
         component: Dashboard
     },
@@ -98,14 +97,16 @@ const router = new VueRouter({
  */
 
 //filter
-Vue.filter("upText", function(text) {
+Vue.filter("upText", function (text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
 });
 
-Vue.filter("myDate", function(created) {
-    return moment(created)
-        .startOf("hour")
-        .fromNow();
+Vue.filter("createDate", function (created) {
+    return moment(created).startOf('hour').fromNow();
+});
+
+Vue.filter("updateDate", function (update) {
+    return moment(update).format("MMM Do YY");
 });
 
 
@@ -113,7 +114,7 @@ Vue.filter("myDate", function(created) {
 
 const app = new Vue({
     el: "#app",
-    vuetify:Vuetify,
+    vuetify: Vuetify,
     router,
     components: {
         Home

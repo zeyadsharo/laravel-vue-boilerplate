@@ -5,25 +5,17 @@
           <sidebar></sidebar>
       </v-list>
     </v-navigation-drawer>
-    <navbar :user="user">
-
-
-
-    </navbar>
+    <navbar :user="user"></navbar>
     <v-content>
       <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
-        
-              <v-layout justify-center>
+         <v-layout justify-center>
             <v-flex shrink>
               <router-view></router-view>
             </v-flex>
           </v-layout>
-           
-        </v-row>
       </v-container>
     </v-content>
-    <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
+    <!-- <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" width="800px">
@@ -63,7 +55,7 @@
           <v-btn text @click="dialog = false">Save</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
   </v-app>
 </template>
 

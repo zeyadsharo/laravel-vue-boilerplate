@@ -6,17 +6,16 @@
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
-        <v-btn
-          v-on="on"
-          v-if="$auth.can('create user')"
-          rounded
-          color="primary"
-          dark
-          class="mb-2"
-        >
-        
-          <v-icon color="#fd7e14">fas fa-user-plus</v-icon>&nbsp; New User
-        </v-btn>
+          <v-btn
+            v-on="on"
+            v-if="$auth.can('create user')"
+            rounded
+            color="primary"
+            dark
+            class="mb-2"
+          >
+            <v-icon color="#fd7e14">fas fa-user-plus</v-icon>&nbsp; New User
+          </v-btn>
         </template>
         <v-card>
           <v-card-title>
@@ -96,39 +95,54 @@
           hide-details
         ></v-text-field>
       </v-card-title>
-      <v-data-table
-        v-if="$auth.can('view users')"
-        :headers="headers"
-        :search="search"
-        :items="tableData"
-        class="elevation-1"
-      >
-        <v-spacer></v-spacer>
-        <template slot="items" slot-scope="props">
-          <td>{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.email }}</td>
-          <td class="text-xs-right" v-if="props.item.role.name">{{ props.item.role.name }}</td>
-                <td class="text-xs-right" v-else>n/a</td>
-          <td class="text-xs-right">{{ props.item.created_at }}</td>
-          <td class="text-xs-right">{{ props.item.updated_at  }}</td>
+      <v-data-table :headers="headers" :items="tableData" class="elevation-1">
+        <template v-slot:item.name="{ item }">
+          <!-- <v-chip color="red" outlined dark>{{ item.name }}</v-chip> -->
+          <v-chip pill v-on="on">
+            <v-avatar left>
+              <!-- <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img> -->
+              <v-icon color="green" small>fas fa-user</v-icon>
+            </v-avatar>
+            {{ item.name }}
+          </v-chip>
+        </template>
+        <template v-slot:item.role="{ item }">
+          <v-chip :color="getColor(item.role.name)" dark>{{ item.role.name }}</v-chip>
+        </template>
+        <template v-slot:item.role="{ item }">
+          <v-chip :color="getColor(item.role.name)" dark>{{ item.role.name }}</v-chip>
+        </template>
+        <template v-slot:item.role="{ item }">
+          <v-chip :color="getColor(item.role.name)" dark>{{ item.role.name }}</v-chip>
+        </template>
+        <template v-slot:item.created_at="{ item }">
+          <v-chip
+            :color="getColorblue(item.role.created_at)"
+            dark
+          >{{ item.role.created_at | updateDate}}</v-chip>
+        </template>
+        <template v-slot:item.updated_at="{ item }">
+          <v-chip
+            :color="getColorblue(item.role.updated_at)"
+            dark
+          >{{ item.role.updated_at | createDate}}</v-chip>
+        </template>
+        <template v-slot:item.action="{ item }">
           <td class="justify-center layout px-0">
             <v-icon
               color="green"
               small
               class="mr-2"
               v-if="$auth.can('edit user')"
-              @click="editItem(props.item)"
+              @click="editItem(item)"
             >fas fa-edit</v-icon>
             <v-icon
               v-if="$auth.can('delete user')"
               small
-              @click="deleteItem(props.item)"
+              @click="deleteItem(item)"
               color="red"
-            >fas fa-edit</v-icon>
+            >fas fa-trash</v-icon>
           </td>
-        </template>
-        <template slot="no-data">
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
         </template>
       </v-data-table>
     </v-card>
@@ -217,7 +231,11 @@ export default {
       // else if (calories > 200) return 'orange'
       return "green";
     },
-
+    getColorblue(calories) {
+      // if (calories > 400) return 'red'
+      // else if (calories > 200) return 'orange'
+      return "blue";
+    },
     editItem(item) {
       this.editedIndex = this.tableData.indexOf(item);
       this.editedItem = Object.assign({}, item);
@@ -263,38 +281,38 @@ export default {
         Object.assign(this.tableData[this.editedIndex], this.editedItem);
         axios
           .put("/api/users/" + this.editedItem.id, this.editedItem)
-          .then(response => this.alertandpush("User  Was Updated",));
+          .then(response => this.alertandpush("User  Was Updated"));
       } else {
         // this.tableData.push(this.editedItem),
-          axios
-            .post("/api/users/", this.editedItem)
-            .then(response => this.alertandpush("User Was Created",this.editedItem))
-            .catch(function(error) {
-              Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-                footer:
-                  "Try to insert field correctly <br/> and make sure the email is not Duplicate"
-              });
+        axios
+          .post("/api/users/", this.editedItem)
+          .then(response =>
+            this.alertandpush("User Was Created", this.editedItem)
+          )
+          .catch(function(error) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              footer:
+                "Try to insert field correctly <br/> and make sure the email is not Duplicate"
             });
+          });
       }
     },
-    alertandpush(item,editedItem) {
-      
-      if (editedItem!=null)
-      {
-         this.tableData.push(editedItem);
+    alertandpush(item, editedItem) {
+      if (editedItem != null) {
+        this.tableData.push(editedItem);
       }
-     
-       Swal.fire({
+
+      Swal.fire({
         position: "top-end",
         icon: "success",
         title: item,
         showConfirmButton: false,
         timer: 1500
       });
-        this.close();
+      this.close();
     },
     alert(item) {
       Swal.fire({
