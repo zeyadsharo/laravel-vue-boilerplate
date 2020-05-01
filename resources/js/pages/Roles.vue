@@ -5,11 +5,11 @@
       <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="700px">
-         <template v-slot:activator="{ on }">
-        <v-btn v-on="on" v-if="$auth.can('create role')" color="primary" dark class="mb-2">
-          <v-icon color="#fd7e14">fas fa-plus-circle</v-icon>&nbsp;New Role
-        </v-btn>
-         </template>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on" v-if="$auth.can('create role')" color="primary" dark class="mb-2">
+            <v-icon  color="#fd7e14">fas fa-plus-circle</v-icon>&nbsp;New Role
+          </v-btn>
+        </template>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -48,40 +48,49 @@
         </v-card>
       </v-dialog>
     </v-toolbar>
-    <v-data-table :headers="headers" :items="tableData" class="elevation-1">
-      <template v-if="$auth.can('view roles')"  slot="items" slot-scope="props">
-        <td>{{ props.item.name }}</td>
-        <td style="width: 40%" v-if="props.item.permissions">
+    <v-data-table
+      v-if="$auth.can('view roles')"
+      :headers="headers"
+      :items="tableData"
+      class="elevation-1"
+    >
+      <template v-slot:item.name="{ item }">
+        <v-chip :color="getColor(item.name)" dark>{{ item.name }}</v-chip>
+      </template>
+
+      <template v-slot:item.permissions="{ item }">
+        <td class="text-xs-right" v-if="item.permissions">
           <v-chip
             small
-            v-for="(permission,index) in props.item.permissions"
+            v-for="(permission,index) in item.permissions"
             color="primary"
             text-color="white"
             :key="index"
-          >{{permission.name}}</v-chip>
+            dark
+          >
+            <tr>{{permission.name}}</tr>
+          </v-chip>
         </td>
         <td v-else>n/a</td>
-        <td >
-          <!-- <v-icon
-            v-if="$auth.can('edit role')"
-            small
-            color="green"
-            class="mr-2"
-            @click="editItem(props.item)"
-          >fa far-edit</v-icon>
+      </template>
+      <template v-slot:item.action="{ item }">
+        <td class="justify-center layout px-0">
           <v-icon
-            color="red"
+            color="green"
             small
+            class="mr-2"
+            v-if="$auth.can('edit role')"
+            @click="editItem(item)"
+          >fas fa-edit</v-icon>
+          <v-icon
             v-if="$auth.can('delete role')"
-           
-          >delete</v-icon> -->
-      
-                <v-btn class="mx-2" fab dark small color="red"  @click="deleteItem(props.item)">
-                    <v-icon dark>mdi-heart</v-icon>
-                </v-btn>
-            
+            small
+            @click="deleteItem(item)"
+            color="red"
+          >fas fa-trash</v-icon>
         </td>
       </template>
+
       <template slot="no-data">
         <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
@@ -102,8 +111,8 @@ export default {
     ],
     headers: [
       { text: "Name", value: "name" },
-      { text: "Permissions", value: "created_at" },
-      { text: "Actions", value: "action",sortable: false}
+      { text: "Permissions", value: "permissions" },
+      { text: "Actions", value: "action", sortable: false }
     ],
     tableData: [],
     editedIndex: -1,
@@ -135,6 +144,11 @@ export default {
   },
 
   methods: {
+    getColor(calories) {
+      // if (calories > 400) return 'red'
+      // else if (calories > 200) return 'orange'
+      return "green";
+    },
     initialize() {
       axios.get("/api/roles").then(response => {
         this.tableData = response.data.data;

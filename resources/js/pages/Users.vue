@@ -3,7 +3,7 @@
     <v-app-bar dark text color="#fd7e14 darken-1">
       <v-toolbar>Users</v-toolbar>
       <v-divider class="mx-2" inset vertical></v-divider>
-      <v-spacer></v-spacer>
+      <!-- <v-spacer></v-spacer> -->
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on }">
           <v-btn
@@ -144,6 +144,9 @@
             >fas fa-trash</v-icon>
           </td>
         </template>
+         <template slot="no-data">
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
       </v-data-table>
     </v-card>
   </div>

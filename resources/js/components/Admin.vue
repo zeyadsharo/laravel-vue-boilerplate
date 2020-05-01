@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+    <v-navigation-drawer v-model="drawer"  absolute :clipped="$vuetify.breakpoint.lgAndUp" app>
       <v-list dense>
           <sidebar></sidebar>
       </v-list>

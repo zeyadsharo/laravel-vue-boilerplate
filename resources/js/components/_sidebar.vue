@@ -47,7 +47,7 @@
 
     <v-list-item to="/admin/activities">
       <v-list-item-action>
-        <v-icon color="blue">fad fa-user-cog</v-icon>
+        <v-icon color="blue">fa fa-user-cog</v-icon>
       </v-list-item-action>
       <v-list-item-content>
         <v-list-item-title>Activities</v-list-item-title>
