@@ -1,67 +1,67 @@
-<template>
+<template v-slot:activator="{ on }">
   <v-list dense  >
-    <v-list-tile exact to="/admin">
-      <v-list-tile-action>
+    <v-list-item exact to="/admin">
+      <v-list-item-action>
         <v-icon color="blue">fas fa-tachometer-alt</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-content>
-        <v-list-tile-title>Dashboard</v-list-tile-title>
-      </v-list-tile-content>
-    </v-list-tile>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title>Dashboard</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
     <v-list-group no-action >
-      <v-list-tile slot="activator">
-        <v-list-tile-action>
+      <v-list-item slot="activator">
+        <v-list-item-action>
           <v-icon color="blue">fas fa-users</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>User Management</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile to="/admin/users">
-        <v-list-tile-action>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>User Management</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item to="/admin/users">
+        <v-list-item-action>
           <v-icon color="#fd7e14">far fa-user</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>user</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>user</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
-      <v-list-tile to="/admin/roles">
-        <v-list-tile-action>
+      <v-list-item to="/admin/roles">
+        <v-list-item-action>
           <v-icon color="primary">fas fa-toolbox</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>Roles</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>Roles</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
 
-      <v-list-tile to="/admin/permissions">
-        <v-list-tile-action>
+      <v-list-item to="/admin/permissions">
+        <v-list-item-action>
           <v-icon color="#f783ac">fas fa-key</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>Permissions</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title>Permissions</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
     </v-list-group>
 
-    <v-list-tile to="/admin/activities">
-      <v-list-tile-action>
+    <v-list-item to="/admin/activities">
+      <v-list-item-action>
         <v-icon color="blue">fad fa-user-cog</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-content>
-        <v-list-tile-title>Activities</v-list-tile-title>
-      </v-list-tile-content>
-    </v-list-tile>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title>Activities</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
 
-    <v-list-tile to="/admin/settings">
-      <v-list-tile-action>
+    <v-list-item to="/admin/settings">
+      <v-list-item-action>
         <v-icon color="blue">settings</v-icon>
-      </v-list-tile-action>
-      <v-list-tile-content>
-        <v-list-tile-title>Settings</v-list-tile-title>
-      </v-list-tile-content>
-    </v-list-tile>
+      </v-list-item-action>
+      <v-list-item-content>
+        <v-list-item-title>Settings</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
   </v-list>
 </template>
 

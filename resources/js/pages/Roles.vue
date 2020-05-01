@@ -1,13 +1,15 @@
 <template>
   <div>
-    <v-toolbar dark flat color="grey-lighten">
+    <v-toolbar dark text color="grey-lighten">
       <v-toolbar-title>Roles</v-toolbar-title>
       <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="700px">
-        <v-btn slot="activator" v-if="$auth.can('create role')" color="primary" dark class="mb-2">
+         <template v-slot:activator="{ on }">
+        <v-btn v-on="on" v-if="$auth.can('create role')" color="primary" dark class="mb-2">
           <v-icon color="#fd7e14">fas fa-plus-circle</v-icon>&nbsp;New Role
         </v-btn>
+         </template>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -39,15 +41,15 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat v-if="editcon" @click="save">Edit</v-btn>
-            <v-btn color="blue darken-1" flat v-else @click="save">Save</v-btn>
+            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+            <v-btn color="blue darken-1" text v-if="editcon" @click="save">Edit</v-btn>
+            <v-btn color="blue darken-1" text v-else @click="save">Save</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-toolbar>
     <v-data-table :headers="headers" :items="tableData" class="elevation-1">
-      <template v-if="$auth.can('view roles')" slot="items" slot-scope="props">
+      <template v-if="$auth.can('view roles')"  slot="items" slot-scope="props">
         <td>{{ props.item.name }}</td>
         <td style="width: 40%" v-if="props.item.permissions">
           <v-chip
@@ -59,20 +61,25 @@
           >{{permission.name}}</v-chip>
         </td>
         <td v-else>n/a</td>
-        <td class="justify-center layout px-0">
-          <v-icon
+        <td >
+          <!-- <v-icon
             v-if="$auth.can('edit role')"
             small
             color="green"
             class="mr-2"
             @click="editItem(props.item)"
-          >edit</v-icon>
+          >fa far-edit</v-icon>
           <v-icon
             color="red"
             small
             v-if="$auth.can('delete role')"
-            @click="deleteItem(props.item)"
-          >delete</v-icon>
+           
+          >delete</v-icon> -->
+      
+                <v-btn class="mx-2" fab dark small color="red"  @click="deleteItem(props.item)">
+                    <v-icon dark>mdi-heart</v-icon>
+                </v-btn>
+            
         </td>
       </template>
       <template slot="no-data">
@@ -96,7 +103,7 @@ export default {
     headers: [
       { text: "Name", value: "name" },
       { text: "Permissions", value: "created_at" },
-      { text: "Actions", value: "name", sortable: false }
+      { text: "Actions", value: "action",sortable: false}
     ],
     tableData: [],
     editedIndex: -1,

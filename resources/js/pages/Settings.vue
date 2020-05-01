@@ -1,4 +1,4 @@
-<template>
+<template v-slot:activator="{ on }">
     <div>
         <h2>Settings</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cupiditate sequi soluta suscipit tempore unde voluptates! Cupiditate doloribus enim esse et fugiat, ipsum, magni nostrum placeat, suscipit unde vitae voluptate?</p>

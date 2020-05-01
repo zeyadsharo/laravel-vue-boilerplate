@@ -14,7 +14,7 @@
      <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
      <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <!-- Styles -->
-    
+    <script src="https://cdn.jsdelivr.net/npm/keycloak-js@7.0.0/dist/keycloak.min.js"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>

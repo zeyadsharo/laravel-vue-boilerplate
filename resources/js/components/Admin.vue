@@ -1,6 +1,6 @@
-<template>
+<template v-slot:activator="{ on }">
   <div id="app">
-    <v-app id="inspire" dark>
+    <v-app id="inspire" >
       <v-navigation-drawer clipped fixed v-model="drawer" app>
         <sidebar></sidebar>
       </v-navigation-drawer>
@@ -16,9 +16,11 @@
           </v-layout>
         </v-container>
       </v-content>
-  
+
       <v-footer color="primary darken-1" app fixed>
-              <v-spacer></v-spacer> <span>&copy; 2019</span><v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <span>&copy; 2019</span>
+        <v-spacer></v-spacer>
       </v-footer>
     </v-app>
   </div>

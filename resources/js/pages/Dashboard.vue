@@ -1,4 +1,4 @@
-<template>
+<template v-slot:activator="{ on }">
  <v-app id="inspire"   light>
     <div>
         <h2>Dashboard</h2>

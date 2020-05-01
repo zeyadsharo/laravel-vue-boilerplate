@@ -1,4 +1,4 @@
-<template>
+<template v-slot:activator="{ on }">
   <v-layout row fill-height justify-space-around>
     <div v-if="!activities.length">
       <h3>No Activities to show</h3>

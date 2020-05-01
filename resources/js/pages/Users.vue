@@ -1,20 +1,23 @@
-<template>
+<template >
   <div>
-    <v-toolbar dark flat color="#fd7e14 darken-1">
-      <v-toolbar-title>Users</v-toolbar-title>
+    <v-app-bar dark text color="#fd7e14 darken-1">
+      <v-toolbar>Users</v-toolbar>
       <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
+        <template v-slot:activator="{ on }">
         <v-btn
-          slot="activator"
+          v-on="on"
           v-if="$auth.can('create user')"
           rounded
           color="primary"
           dark
           class="mb-2"
         >
+        
           <v-icon color="#fd7e14">fas fa-user-plus</v-icon>&nbsp; New User
         </v-btn>
+        </template>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -76,12 +79,12 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue" flat @click="save">{{editdilaog}}</v-btn>
+            <v-btn color="blue darken-1" text @click="close">Cancel</v-btn>
+            <v-btn color="blue" text @click="save">{{editdilaog}}</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-toolbar>
+    </v-app-bar>
     <v-card>
       <v-card-title>
         <v-spacer></v-spacer>
@@ -104,12 +107,10 @@
         <template slot="items" slot-scope="props">
           <td>{{ props.item.name }}</td>
           <td class="text-xs-right">{{ props.item.email }}</td>
-          <td class="text-xs-right" v-if="props.item.role">
-            <v-chip :color="getColor(props.item.role)" dark>{{props.item.role.name|upText}}</v-chip>
-          </td>
-          <td class="text-xs-right" v-else>n/a</td>
-          <td class="text-xs-right">{{ props.item.created_at | myDate }}</td>
-          <td class="text-xs-right">{{ props.item.updated_at | myDate }}</td>
+          <td class="text-xs-right" v-if="props.item.role.name">{{ props.item.role.name }}</td>
+                <td class="text-xs-right" v-else>n/a</td>
+          <td class="text-xs-right">{{ props.item.created_at }}</td>
+          <td class="text-xs-right">{{ props.item.updated_at  }}</td>
           <td class="justify-center layout px-0">
             <v-icon
               color="green"
@@ -117,13 +118,13 @@
               class="mr-2"
               v-if="$auth.can('edit user')"
               @click="editItem(props.item)"
-            >edit</v-icon>
+            >fas fa-edit</v-icon>
             <v-icon
               v-if="$auth.can('delete user')"
               small
               @click="deleteItem(props.item)"
               color="red"
-            >delete</v-icon>
+            >fas fa-edit</v-icon>
           </td>
         </template>
         <template slot="no-data">
@@ -160,7 +161,7 @@ export default {
       { text: "Role", value: "role" },
       { text: "Created", value: "created_at" },
       { text: "Updated", value: "updated_at" },
-      { text: "Actions", value: "name", sortable: false }
+      { text: "Actions", value: "action", sortable: false }
     ],
     tableData: [],
     editedIndex: -1,

@@ -6,9 +6,9 @@ const VuetifyLoaderPlugin = require("vuetify-loader/lib/plugin");
 var webpackConfig = {
     plugins: [
         new CaseSensitivePathsPlugin(),
-        new VuetifyLoaderPlugin(),
+        new VuetifyLoaderPlugin()
         // other plugins ...
-    ],
+    ]
     // other webpack config ...
 };
 /*
@@ -22,7 +22,14 @@ var webpackConfig = {
  |
  */
 
-mix.js("resources/js/app.js", "public/js").sass(
-    "resources/sass/app.scss",
-    "public/css"
-);
+ mix
+     .options({
+         extractVueStyles: true,
+     })
+     .webpackConfig({
+         plugins: [new VuetifyLoaderPlugin()]
+     })
+     .js('resources/js/app.js', 'public/js')
+     .sass('resources/sass/app.scss', 'public/css')
+
+

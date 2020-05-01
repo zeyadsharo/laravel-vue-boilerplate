@@ -1,7 +1,7 @@
-<template>
-  <v-toolbar  color="primary darken-1" dart app fixed clipped-left>
-    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-    <v-toolbar-title>Maintenance Admin</v-toolbar-title>
+<template v-slot:activator="{ on }">
+  <v-app-bar  color="primary darken-1" dart app fixed clipped-left>
+    <v-app-bar-nav-icon  color="red" @click="drawer = true"></v-app-bar-nav-icon>
+     <v-toolbar-title>Maintenance Admin</v-toolbar-title>
     <v-spacer></v-spacer>
 
     <v-menu
@@ -11,11 +11,12 @@
       :nudge-bottom="14"
       transition="scale-transition"
     >
-      <v-btn @click="markAsRead" icon flat slot="activator">
+      <v-btn color="red" @click="markAsRead" icon text >
         <v-badge color="red" overlap>
           <span slot="badge">{{unreadNotifications.length}}</span>
-          <v-icon medium>notifications</v-icon>
+          <v-icon medium>far fa-bell</v-icon>
         </v-badge>
+        
       </v-btn>
 
       <v-list>
@@ -27,7 +28,7 @@
       </v-list>
     </v-menu>
     <v-menu offset-y origin="center center" :nudge-bottom="10" transition="scale-transition">
-      <v-btn icon large flat slot="activator">
+      <v-btn icon large text >
         <v-avatar size="30px">
           <img  src="https://via.placeholder.com/150" alt="Michael Wang">
         </v-avatar>
@@ -51,7 +52,7 @@
         </v-list-tile>
       </v-list>
     </v-menu>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 
@@ -59,7 +60,7 @@
 export default {
   props: ["user"],
   data: () => ({
-    drawer: null,
+    drawer: false,
     allNotifications: [],
     unreadNotifications: [],
   }),

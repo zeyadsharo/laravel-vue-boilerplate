@@ -9,20 +9,27 @@
 import Swal from "sweetalert2";
 window.Swal = Swal;
 
+
+
 //for moment time
 import moment from "moment";
 
 require("./bootstrap");
 require("../sass/app.scss");
-window.Vue = require("vue");
-import Vuetify from "vuetify";
-// import Vuetify from 'vuetify/lib';
-// import 'vuetify/src/styles/main.sass'
-
-//  import Vuetify from '../plugins/vuetify'
-
-import VueRouter from "vue-router";
+import Vue from "vue";
+//  import Vuetify from "vuetify/lib";
+// export default new Vuetify();
 Vue.use(Vuetify);
+
+
+window.Vue = require("Vue");
+// import Vuetify from "vuetify";
+// import Vuetify from 'vuetify/lib';
+ import 'vuetify/src/styles/main.sass'
+
+import Vuetify from '../plugins/vuetify'
+import VueRouter from "vue-router";
+// Vue.use(Vuetify);
 Vue.use(VueRouter);
 import "vuetify/dist/vuetify.min.css";
 import Auth from "./auth";
@@ -101,11 +108,14 @@ Vue.filter("myDate", function(created) {
         .fromNow();
 });
 
+
+
+
 const app = new Vue({
     el: "#app",
-    vuetify: Vuetify,
+    vuetify:Vuetify,
     router,
     components: {
         Home
     }
-});
+}).$mount("#app");
