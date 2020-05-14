@@ -163,16 +163,10 @@
           <v-chip :color="getColor(item.role.name)" dark>{{ item.role.name }}</v-chip>
         </template>
         <template v-slot:item.created_at="{ item }">
-          <v-chip
-            :color="getColorblue(item.role.created_at)"
-            dark
-          >{{ item.role.created_at | updateDate}}</v-chip>
+          <v-chip :color="getColorblue(item.created_at)" dark>{{ item.created_at | updateDate}}</v-chip>
         </template>
         <template v-slot:item.updated_at="{ item }">
-          <v-chip
-            :color="getColorblue(item.role.updated_at)"
-            dark
-          >{{ item.role.updated_at | createDate}}</v-chip>
+          <v-chip :color="getColorblue(item.updated_at)" dark>{{ item.updated_at | createDate}}</v-chip>
         </template>
         <template v-slot:item.action="{ item }">
           <td class="justify-center layout px-0">
@@ -217,7 +211,7 @@ export default {
     error: "",
     rules: {
       required: value => !!value || "Required.",
-      min: v => v.length >= 8 || "Min 8 characters",
+      min: v => v.length >= 8 || "Min 8 characters"
     },
     nameRules: [
       v => !!v || "Name is required",

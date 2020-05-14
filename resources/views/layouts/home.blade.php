@@ -19,7 +19,7 @@
 </head>
 <body>
     <div id="app">
-    <home> </home>
+    <login> </login>
     </div>
 </body>
 </html>

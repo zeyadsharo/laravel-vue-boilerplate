@@ -6,7 +6,7 @@ use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Carbon\Carbon;
 class UserController extends Controller
 {
     /**
@@ -69,6 +69,7 @@ class UserController extends Controller
         $user->update([
             'name'=> $request->name,
             'email'=> $request->email,
+            'update_at'=>Carbon::now()->toDateTimeString(),
         ]);
 
         if ($request->has('role')) {

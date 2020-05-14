@@ -45,12 +45,14 @@ Vue.prototype.$auth = new Auth(window.user);
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-import Home from "./pages/home.vue";
+import login from "./pages/login.vue";
+import home from "./pages/home.vue";
 Vue.component(
     "example-component",
     require("./components/ExampleComponent.vue").default
 );
 Vue.component("admin", require("./components/Admin.vue").default);
+Vue.component("login", require("./pages/login.vue").default);
 Vue.component("home", require("./pages/home.vue").default);
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
@@ -117,6 +119,6 @@ const app = new Vue({
     vuetify: Vuetify,
     router,
     components: {
-        Home
+        login,home
     }
 }).$mount("#app");
