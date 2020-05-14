@@ -17,26 +17,22 @@
           </v-btn>
 
           <template v-slot:extension>
-            <v-tabs v-model="model" centered slider-color="yellow">
-              <v-tab :href="`#tab-${i}`">Requsets</v-tab>
-              <v-tab :href="`#tab-${i}`">History</v-tab>
-              <v-tab :href="`#tab-${i}`">In process</v-tab>
+            <v-tabs v-model="activeTab"  centered slider-color="yellow">
+              <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.route" exact>{{ tab.name }}</v-tab>
             </v-tabs>
           </template>
         </v-toolbar>
-
-        <v-tabs-items v-model="model">
-          <v-tab-item v-for="i in 3" :key="i" :value="`tab-${i}`">
-            <v-card flat>
-              <v-card-text v-text="text"></v-card-text>
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items>
       </v-card>
 
-      <v-content>
-        <v-container class="fill-height" fluid></v-container>
-      </v-content>
+        <v-content>
+      <v-container class="fill-height" fluid>
+         <v-layout justify-center>
+            <v-flex shrink>
+              <router-view></router-view>
+            </v-flex>
+          </v-layout>
+      </v-container>
+    </v-content>
       <v-footer color="primary lighten-1" padless>
         <v-row justify="center" no-gutters>
           <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
@@ -56,14 +52,17 @@ export default {
   },
   data: () => ({
     drawer: null,
-    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
-    model: "tab-2",
-    text: "tabs ,"
+      activeTab: `/home/requests`,
+    tabs: [
+      { id: 1, name: "Requests", route: `/home/requests` },
+      { id: 2, name: "History", route: `/home/history` },
+       { id: 3, name: "in Process", route: `/home/inprogress` }
+    ]
   }),
- methods: {
+  methods: {
     logout() {
       axios.post("/logout").then(response => window.location.reload());
-    },
+    }
   }
 };
 </script>

@@ -61,7 +61,25 @@ import Roles from "./pages/Roles";
 import Permissions from "./pages/Permissions";
 import Activities from "./pages/Activities";
 
-const routes = [{
+import Request from "./workflow/requests";
+import History from "./workflow/history";
+import Inprogress from "./workflow/inprogress";
+const routes = [
+    
+    {
+        path: "/home/requests",
+        component: Request
+    },
+    {
+        path: "/home/history",
+        component: History
+    },
+    {
+        path: "/home/inprogress",
+        component: Inprogress
+    },
+    
+    {
         path: "/admin/",
         component: Dashboard
     },

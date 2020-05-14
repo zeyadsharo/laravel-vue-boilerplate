@@ -31985,4 +31985,6 @@ html.overflow-y-hidden {
   height: inherit;
   margin: 0;
   width: inherit;
+}.v-input--checkbox.v-input--indeterminate.v-input--is-disabled {
+  opacity: 0.6;
 }
