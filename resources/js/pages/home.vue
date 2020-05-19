@@ -2,16 +2,14 @@
   <div id="app">
     <v-app id="inspire" light>
       <v-card>
-        <v-toolbar color="cyan" dark flat>
+        <v-toolbar color="primary lighten-1" dark flat>
           <div class="mx-3"></div>
 
           <v-badge bordered bottom color="deep-purple accent-4" dot offset-x="10" offset-y="10">
-            <v-avatar    size="40">
+            <v-avatar size="40">
               <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"></v-img>
             </v-avatar>
-     
-          </v-badge>       
-          Zeyad Sharo
+          </v-badge>Zeyad Sharo
           <v-spacer></v-spacer>
           <v-toolbar-title>Maintenace System Home</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -42,7 +40,7 @@
       </v-content>
       <v-footer color="primary lighten-1" padless>
         <v-row justify="center" no-gutters>
-          <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
+          <v-col class="primary lighten-1 py-4 text-center white--text" cols="12">
             {{ new Date().getFullYear() }} —
             <strong>University Of Zakho</strong>
           </v-col>
