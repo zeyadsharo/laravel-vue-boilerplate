@@ -1,7 +1,7 @@
 <template>
-    <div id="app">
+  <div id="app">
     <v-app id="inspire" light>
-    <!-- <v-navigation-drawer v-model="drawer" app>
+      <!-- <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
         <v-list-item link>
           <v-list-item-action>
@@ -20,17 +20,17 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>-->
+      </v-navigation-drawer>-->
 
-    <v-app-bar app color="primary lighten-1" dark>
-      <v-spacer></v-spacer>
-      <v-toolbar-title>Maintenace Sytem</v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+      <v-app-bar app color="primary lighten-1" dark>
+        <v-spacer></v-spacer>
+        <v-toolbar-title>Maintenace Sytem</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-app-bar>
 
-    <v-content>
-      <v-container class="fill-height" fluid>
-        <!-- <v-card width="1000px" align-center>
+      <v-content>
+        <v-container class="fill-height" fluid>
+          <!-- <v-card width="1000px" align-center>
           <v-timeline :dense="$vuetify.breakpoint.smAndDown">
             <v-timeline-item color="purple lighten-2" fill-dot right>
               <v-card>
@@ -123,51 +123,60 @@
               </v-card>
             </v-timeline-item>
           </v-timeline>
-        </v-card>-->
-        <v-row>
-          <v-col cols="12" sm="12">
-            <v-hover v-slot:default="{ hover }" open-delay="200">
-              <v-card :elevation="hover ? 16 : 2" class="mx-auto" height="500" max-width="900">
-                <v-card-text class="font-weight-medium mt-12 text-center subtitle-1">How System Work</v-card-text>
-                <v-spacer />
-                <v-card align-center class="mx-auto" height="400" max-width="850">
-                  <iframe
-                    align-center
-                    width="850"
-                    height="400"
-                    src="https://www.youtube.com/embed/bbGsMLI14lw"
-                    frameborder="0"
-                    allow="autoplay; encrypted-media"
-                    allowfullscreen
-                  ></iframe>
+          </v-card>-->
+          <v-row>
+            <v-col cols="12" sm="12">
+              <v-hover v-slot:default="{ hover }" open-delay="200">
+                <v-card :elevation="hover ? 16 : 2" class="mx-auto" height="500" max-width="900">
+                  <v-card-text
+                    class="font-weight-medium mt-12 text-center subtitle-1"
+                  >How System Work</v-card-text>
+                  <v-spacer />
+                  <v-card align-center class="mx-auto" height="400" max-width="850">
+                    <iframe
+                      align-center
+                      width="850"
+                      height="400"
+                      src="https://www.youtube.com/embed/bbGsMLI14lw"
+                      frameborder="0"
+                      allow="autoplay; encrypted-media"
+                      allowfullscreen
+                    ></iframe>
+                  </v-card>
                 </v-card>
-              </v-card>
-            </v-hover>
-          </v-col>
-        </v-row>
+              </v-hover>
+            </v-col>
+          </v-row>
 
-        <v-row>
-          <v-col cols="12" sm="12">
-            <v-card align-center class="mx-auto" width="850">
-              <v-btn rounded align-center block color="success" dark  @click="login">
-                <v-icon color="blue darken-2">mdi-google</v-icon>Login
-              </v-btn>
-            </v-card>
+          <v-row>
+            <v-col cols="12" sm="12">
+              <v-card align-center class="mx-auto" width="850">
+                <v-btn rounded align-center block color="success" dark @click="login">
+                  <v-icon color="blue darken-2">mdi-google</v-icon>Login
+                </v-btn>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-content>
+      <v-footer color="primary lighten-1" padless>
+        <v-row justify="center" no-gutters>
+          <v-btn
+            v-for="link in links"
+            :key="link"
+            color="white"
+            text
+            rounded
+            class="my-2"
+          >{{ link }}</v-btn>
+          <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
+            {{ new Date().getFullYear() }} —
+            <strong>University Of Zakho</strong>
           </v-col>
         </v-row>
-      </v-container>
-    </v-content>
-    <v-footer color="primary lighten-1" padless>
-      <v-row justify="center" no-gutters>
-        <v-btn v-for="link in links" :key="link" color="white" text rounded class="my-2">{{ link }}</v-btn>
-        <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
-          {{ new Date().getFullYear() }} —
-          <strong>University Of Zakho</strong>
-        </v-col>
-      </v-row>
-    </v-footer>
-  </v-app>
-    </div>
+      </v-footer>
+    </v-app>
+  </div>
 </template>
 
 <script>
@@ -175,13 +184,18 @@ export default {
   props: {
     source: String
   },
+  
   data: () => ({
     drawer: null,
-    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"]
+    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
+    
   }),
+  
   methods: {
     login() {
-      axios.get("/login").then(Response => (window.location.href = "home"));
+      axios
+        .get("auth/google")
+        .then(Response => (window.location.href = "home"));
     }
   }
 };

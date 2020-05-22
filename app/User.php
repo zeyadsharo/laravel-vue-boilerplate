@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Notification;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
-
 class User extends Authenticatable
 {
     use Notifiable, HasRoles, LogsActivity, CausesActivity;
@@ -22,7 +21,7 @@ class User extends Authenticatable
      */
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'google_id',
     ];
 
     protected static $logAttributes = ['name', 'email','password'];
@@ -39,7 +38,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
+    protected $casts = [ 'email_verified_at' => 'datetime', ];
 
     public function blogs()
     {
