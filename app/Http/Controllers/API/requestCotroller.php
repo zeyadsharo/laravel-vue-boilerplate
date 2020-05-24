@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Socialite;
+use App\User;
 class requestCotroller extends Controller
 {
     /**
@@ -14,7 +15,12 @@ class requestCotroller extends Controller
      */
     public function index()
     {
-        //
+        //$user= User::findorfail(1);
+        // $request=Request::create(['created_at'=>Carbon::today()->toDateString(),'requestnumber'=>123132,
+        // 'department'=>'computer','location'=>'zakho','problem_description'=>'sdfdsfdsfdsf','priority'=>'sdfdsfd','completed_by'=>'zeyad
+        // Sharo','Remarks'=>'sdfdsfdsf','date_completed'=>Carbon::today()->toDateString()]);
+        // $user->requests()->save($request);
+        return view("home");
     }
 
     /**

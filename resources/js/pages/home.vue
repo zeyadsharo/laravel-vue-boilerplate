@@ -9,7 +9,8 @@
             <v-avatar size="40">
               <v-img src="https://cdn.vuetifyjs.com/images/lists/2.jpg"></v-img>
             </v-avatar>
-          </v-badge>Zeyad Sharo
+          </v-badge>
+          {{user.name}}
           <v-spacer></v-spacer>
           <v-toolbar-title>Maintenace System Home</v-toolbar-title>
           <v-spacer></v-spacer>
@@ -57,7 +58,7 @@ export default {
   },
   data: () => ({
     drawer: null,
-    activeTab: `/home/requests`,
+    activeTab: 2,
     tabs: [
       { id: 1, name: "Requests", route: `/home/requests` },
       { id: 2, name: "History", route: `/home/history` },
@@ -68,6 +69,7 @@ export default {
     logout() {
       axios.post("/logout").then(response => window.location.reload());
     }
-  }
+  },
+  props: ["user"]
 };
 </script>

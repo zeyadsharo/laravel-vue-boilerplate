@@ -22,7 +22,7 @@
       </v-list>
       </v-navigation-drawer>-->
 
-      <v-app-bar app color="primary lighten-1" dark>
+      <v-app-bar app color="primary lighten-1" rounded dark>
         <v-spacer></v-spacer>
         <v-toolbar-title>Maintenace Sytem</v-toolbar-title>
         <v-spacer></v-spacer>
@@ -141,6 +141,7 @@
                       frameborder="0"
                       allow="autoplay; encrypted-media"
                       allowfullscreen
+                      rounded
                     ></iframe>
                   </v-card>
                 </v-card>
@@ -184,13 +185,12 @@ export default {
   props: {
     source: String
   },
-  
+
   data: () => ({
     drawer: null,
-    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
-    
+    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"]
   }),
-  
+
   methods: {
     login() {
       axios

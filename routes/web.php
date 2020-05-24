@@ -12,6 +12,8 @@
 */
 
 use App\User;
+use App\Request;
+use Carbon\Carbon;
 Route::get('/', function () {
     return view('layouts.home');
 });
@@ -32,3 +34,13 @@ Route::any('/admin/{any?}', 'AdminController@index')->where('any','.*')->middlew
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home/{any}', 'API\requestCotroller@index')->where('any', '.*');
+
+// Route::get('/create', function () {
+// $user= User::findorfail(1);
+// $request=Request::create(['created_at'=>Carbon::today()->toDateString(),'requestnumber'=>123132,
+// 'department'=>'computer','location'=>'zakho','problem_description'=>'sdfdsfdsfdsf','priority'=>'sdfdsfd','completed_by'=>'zeyad
+// Sharo','Remarks'=>'sdfdsfdsf','date_completed'=>Carbon::today()->toDateString()]);
+// $user->requests()->save($request);
+// });

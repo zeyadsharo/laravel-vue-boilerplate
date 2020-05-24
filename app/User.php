@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-
 use App\Notifications\UserRegistered;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -56,6 +55,10 @@ class User extends Authenticatable
         });
         Notification::send($admins,new UserRegistered($model))  ;
         });
+    }
+    public function requests()
+    {
+        return $this->hasMany('App\Request');
     }
 
 }
