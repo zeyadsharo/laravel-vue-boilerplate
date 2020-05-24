@@ -36,7 +36,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home/{any}', 'API\requestCotroller@index')->where('any', '.*');
-
 // Route::get('/create', function () {
 // $user= User::findorfail(1);
 // $request=Request::create(['created_at'=>Carbon::today()->toDateString(),'requestnumber'=>123132,

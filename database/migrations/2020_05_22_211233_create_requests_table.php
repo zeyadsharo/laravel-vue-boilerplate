@@ -16,8 +16,8 @@ class CreateRequestsTable extends Migration
         Schema::create('requests', function (Blueprint $table) {
              $table->id();
              $table->unsignedBigInteger('user_id');
-             $table->foreign('user_id')->references('id')->on('users');
-             $table->date('created_at');
+             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+             //$table->date('created_at');
              $table->integer('requestnumber');
              $table->string('department');
              $table->string('location');
@@ -26,6 +26,7 @@ class CreateRequestsTable extends Migration
              $table->string('completed_by');
              $table->string('Remarks');
              $table->date('date_completed');
+            $table->timestamps();
               
         });
     }
