@@ -11,7 +11,12 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table :headers="headers" :items="desserts" :search="search"></v-data-table>
+   <v-data-table
+    :headers="headers"
+    :items="tableData"
+    :items-per-page="5"
+    class="elevation-1"
+  ></v-data-table>
     <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
       <v-icon @click="myFunction()">mdi-plus</v-icon>
     </v-btn>
@@ -132,12 +137,13 @@ export default {
           sortable: false,
           value: "name"
         },
-        { text: "id", value: "calories" },
+        { text: "id", value: "id" },
         { text: "Requset Number", value: "fat" },
         { text: "data time", value: "carbs" },
         { text: "description", value: "protein" },
         { text: "process", value: "iron" }
       ],
+      tableData: [],
       desserts: [
         {
           name: "ICT Science",
@@ -158,7 +164,17 @@ export default {
       ]
     };
   },
+   created() {
+    this.initialize();
+  },
   methods: {
+  initialize()
+  {
+           axios.get("/api/request ").then(response => {
+        this.tableData = response.data.data;
+      });
+  }
+    ,
     myFunction: function() {
       var idStrLen = 8;
       // always start with a letter -- base 36 makes for a nice shortcut
@@ -172,5 +188,9 @@ export default {
       this.randomNumber = idStr;
     }
   }
-};
+ 
+
+
+
+}
 </script>

@@ -11,16 +11,15 @@
 |
 */
 
-use App\User;
-use App\Request;
-use Carbon\Carbon;
+
+
 Route::get('/', function () {
     return view('layouts.home');
 });
   
  Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
   Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
-
+Auth::routes();
 Route::get('/mark-all-read/{user}', function (User $user) {
     $user->unreadNotifications->markAsRead();
     return response(['message'=>'done', 'notifications'=>$user->notifications]);
@@ -34,8 +33,11 @@ Route::any('/admin/{any?}', 'AdminController@index')->where('any','.*')->middlew
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
+Route::get('/home/{any}', 'API\HomeController@index')->where('any', '.*');
 
-Route::get('/home/{any}', 'API\requestCotroller@index')->where('any', '.*');
+// Route::get('/api/request', 'API\RequestController@index');
+// Route::apiResources(['request' => 'API\RequestController']);
 // Route::get('/create', function () {
 // $user= User::findorfail(1);
 // $request=Request::create(['created_at'=>Carbon::today()->toDateString(),'requestnumber'=>123132,

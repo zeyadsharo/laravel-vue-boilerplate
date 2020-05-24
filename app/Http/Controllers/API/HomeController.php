@@ -1,11 +1,9 @@
 <?php
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\User;
-use App\Request;
-class requestCotroller extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +12,14 @@ class requestCotroller extends Controller
      */
     public function index()
     {
-           $user = User::find(1);
+        //    $user = User::find(1);
            
-        $request=Request::create(['requestnumber'=>123132,
-        'department'=>'computer','location'=>'zakho','problem_description'=>'sdfdsfdsfdsf',
-        'priority'=>'sdfdsfd','completed_by'=>'zeyad
-        Sharo','user_id'=>1,'Remarks'=>'sdfdsfdsf','date_completed'=>Carbon::today()->toDateString()]);
+        // $request=Request::create(['requestnumber'=>123132,
+        // 'department'=>'computer','location'=>'zakho','problem_description'=>'sdfdsfdsfdsf',
+        // 'priority'=>'sdfdsfd','completed_by'=>'zeyad
+        // Sharo','user_id'=>1,'Remarks'=>'sdfdsfdsf','date_completed'=>Carbon::today()->toDateString()]);
         // $user->requests()->save($request);
+        
         return view("home");
     }
 
