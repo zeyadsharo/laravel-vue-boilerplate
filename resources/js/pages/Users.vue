@@ -268,7 +268,7 @@ export default {
 
   methods: {
     initialize() {
-      axios.get("/api/users").then(response => {
+      axios.get("/api/request").then(response => {
         this.tableData = response.data.data;
       });
 

@@ -11,12 +11,17 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-   <v-data-table
-    :headers="headers"
-    :items="tableData"
-    :items-per-page="5"
-    class="elevation-1"
-  ></v-data-table>
+    <v-data-table :headers="headers" :items="tableData" class="elevation-1">
+      <template v-slot:item.priority="{ item }">
+        <v-chip :color="getColor(item.priority)" dark>{{ item.priority }}</v-chip>
+      </template>
+      <template v-slot:item.problem_description="{ item }">
+        <v-btn text small color="primary" @click="ShowText(item.problem_description)">show des...</v-btn>
+      </template>
+      <template slot="no-data">
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
+      </template>
+    </v-data-table>
     <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
       <v-icon @click="myFunction()">mdi-plus</v-icon>
     </v-btn>
@@ -131,50 +136,38 @@ export default {
       search: "",
       dialog: false,
       headers: [
-        {
-          text: "Request To",
-          align: "start",
-          sortable: false,
-          value: "name"
-        },
-        { text: "id", value: "id" },
-        { text: "Requset Number", value: "fat" },
-        { text: "data time", value: "carbs" },
-        { text: "description", value: "protein" },
-        { text: "process", value: "iron" }
+        { text: "Request number", value: "requestnumber" },
+        { text: "Department", value: "department" },
+        { text: "Location", value: "location" },
+        { text: "Problem_Description", value: "problem_description" },
+        { text: "Priority", value: "priority" },
+        { text: "Created_at", value: "created_at" }
       ],
+      SaveRequest: {
+        name: "",
+        email: "",
+      },
       tableData: [],
-      desserts: [
-        {
-          name: "ICT Science",
-          calories: 231,
-          fat: 24322,
-          carbs: "12:30 AM",
-          protein: "cable internet crashed",
-          iron: "completed "
-        },
-        {
-          name: "ICT Science",
-          calories: 231,
-          fat: 12453,
-          carbs: "9:15 AM",
-          protein: "Change PC",
-          iron: "denied"
-        }
-      ]
+    
     };
   },
-   created() {
+  created() {
     this.initialize();
   },
   methods: {
-  initialize()
-  {
-           axios.get("/api/request ").then(response => {
-        this.tableData = response.data.data;
-      });
-  }
-    ,
+    initialize() {
+      axios
+        .get("/api/request")
+        .then(({ data }) => (this.tableData = data.data));
+    },
+    ShowText(text) {
+      Swal.fire(text);
+    },
+    getColor(priority) {
+      if (priority === "High") return "red";
+      if (priority == "Medium") return "green";
+      if (priority == "Low") return "orange";
+    },
     myFunction: function() {
       var idStrLen = 8;
       // always start with a letter -- base 36 makes for a nice shortcut
@@ -188,9 +181,5 @@ export default {
       this.randomNumber = idStr;
     }
   }
- 
-
-
-
-}
+};
 </script>

@@ -1,10 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+ use App\Http\Controllers\Controller;
+// namespace App\Http\Controllers\Auth;
+// use Illuminate\Http\Request\;
 use App\User;
+use App\Request;
+ use Illuminate\Support\Facades\Auth;
+
 use App\Http\Resources\UserResource;
+use App\Http\Resources\RequestResource;
+// use AuthenticatesUsers;
 class RequestController extends Controller
 {
     /**
@@ -14,8 +20,8 @@ class RequestController extends Controller
      */
     public function index()
     {
-      return User::find(1)->requests;
-      
+         $id=Auth::id();
+       return RequestResource::collection(User::find($id)->requests);
     }
 
     /**
