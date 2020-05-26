@@ -137,7 +137,7 @@
                       align-center
                       width="850"
                       height="400"
-                      src="https://www.youtube.com/embed/bbGsMLI14lw"
+                      src="https://www.youtube.com/embed/mpKd7BzNtZg"
                       frameborder="0"
                       allow="autoplay; encrypted-media"
                       allowfullscreen
@@ -193,9 +193,7 @@ export default {
 
   methods: {
     login() {
-      axios
-        .get("/login")
-        .then(Response => (window.location.href = "home"));
+      axios.get("/login").then(Response => (window.location.href = "home"));
     }
   }
 };

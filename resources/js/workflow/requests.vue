@@ -31,7 +31,12 @@
         <v-container>
           <v-row class="mx-2">
             <v-col cols="6">
-              <v-text-field prepend-icon="mdi-numeric" :readonly="true" v-model="randomNumber" placeholder="no"></v-text-field>
+              <v-text-field
+                prepend-icon="mdi-numeric"
+                :readonly="true"
+                v-model="randomNumber"
+                placeholder="no"
+              ></v-text-field>
             </v-col>
 
             <v-col cols="6">
@@ -100,7 +105,7 @@
               <v-radio-group v-model="SaveRequest.priority" row>
                 <v-radio color="red" label="High" value="high"></v-radio>
                 <v-radio color="green" label="Medium" value="medium"></v-radio>
-                <v-radio color="yellow" label="Low" value="low"  ></v-radio>
+                <v-radio color="yellow" label="Low" value="low"></v-radio>
               </v-radio-group>
             </v-col>
             <!-- <v-col cols="6">
@@ -131,7 +136,7 @@
 export default {
   data() {
     return {
-      items: ["Foo", "Bar", "Fizz", "Buzz"],
+      items: ["Computer Science", "Math", "Physics", "Biology"],
       date: new Date().toISOString().substr(0, 10),
       menu: false,
       modal: false,
@@ -177,22 +182,23 @@ export default {
       if (priority == "Low") return "orange";
     },
 
-    save()
-    {
+    save() {
       axios
-          .post("/api/request", this.SaveRequest)
-          .then(response =>this.alertandpush("Request Was Created", this.SaveRequest))
-          .catch(function(error) {
-            Swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: "Something went wrong!",
-              footer:
-                "Try to insert field correctly <br/> and make sure the email is not Duplicate"
-            });
+        .post("/api/request", this.SaveRequest)
+        .then(response =>
+          this.alertandpush("Request Was Created", this.SaveRequest)
+        )
+        .catch(function(error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer:
+              "Try to insert field correctly <br/> and make sure the email is not Duplicate"
           });
+        });
     },
-     alertandpush(item, editedItem) {
+    alertandpush(item, editedItem) {
       if (editedItem != null) {
         this.tableData.push(editedItem);
       }
@@ -203,9 +209,9 @@ export default {
         showConfirmButton: false,
         timer: 1500
       });
+      this.dialog = false;
     },
     myFunction: function() {
-     
       var idStrLen = 8;
       // always start with a letter -- base 36 makes for a nice shortcut
       var idStr = Math.floor(Math.random() * 25) + 10;
@@ -216,7 +222,7 @@ export default {
         idStr += Math.floor(Math.random() * 35).toString(36);
       } while (idStr.length < idStrLen);
       this.randomNumber = idStr.toString().slice(0, 8);
-       this.SaveRequest.requestnumber = idStr.toString().slice(0, 8);
+      this.SaveRequest.requestnumber = idStr.toString().slice(0, 8);
     }
   }
 };

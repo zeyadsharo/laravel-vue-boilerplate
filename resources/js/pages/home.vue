@@ -67,7 +67,7 @@ export default {
   }),
   methods: {
     logout() {
-      axios.post("/logout").then(response => window.location.reload());
+      axios.post("/logout").then(Response => (window.location.href = "/"));
     }
   },
   props: ["user"]
