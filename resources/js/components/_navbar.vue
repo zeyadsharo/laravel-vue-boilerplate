@@ -11,7 +11,7 @@
       prepend-inner-icon="mdi-magnify"
       label="Search"
       class="hidden-sm-and-down"
-    /> -->
+    />-->
     <v-spacer />
 
     <v-menu left bottom>
@@ -46,7 +46,7 @@
     <v-menu left bottom>
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on" @click="markAsRead" text>
-            <v-icon>far fa-user</v-icon>
+          <v-icon>far fa-user</v-icon>
         </v-btn>
       </template>
 
@@ -57,11 +57,9 @@
         <v-list-item>
           <v-list-item-title @click="logout" ripple="ripple" rel="noopener">
             <v-list-item-action>
-              <v-icon color="red">fas fa-power-off </v-icon> 
-            </v-list-item-action>
-           Logout
+              <v-icon color="red">fas fa-power-off</v-icon>
+            </v-list-item-action>Logout
           </v-list-item-title>
-
         </v-list-item>
       </v-list>
     </v-menu>
@@ -94,7 +92,7 @@ export default {
 
   methods: {
     logout() {
-      axios.post("/logout").then(response => window.location.reload());
+      axios.post("/logout").then(response => (window.location.href = "/"));
     },
     markAsRead() {
       axios.get("/mark-all-read/" + this.user.id).then(response => {
