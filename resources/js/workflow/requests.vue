@@ -31,12 +31,7 @@
         <v-container>
           <v-row class="mx-2">
             <v-col cols="6">
-              <v-text-field
-                prepend-icon="mdi-numeric"
-                :readonly="true"
-                v-model="randomNumber"
-                placeholder="no"
-              ></v-text-field>
+              <v-text-field prepend-icon="mdi-numeric" :readonly="true" v-model="randomNumber" placeholder="no"></v-text-field>
             </v-col>
 
             <v-col cols="6">
@@ -73,16 +68,27 @@
               ></v-text-field>
             </v-col>
             <v-col class="d-flex" cols="12" sm="6">
-              <v-select :items="items" prepend-icon="mdi-school" label="select Department" solo></v-select>
+              <v-select
+                :items="items"
+                v-model="SaveRequest.department"
+                prepend-icon="mdi-school"
+                label="select Department"
+                solo
+              ></v-select>
             </v-col>
             <v-col cols="6">
-              <v-text-field prepend-icon="mdi-map-marker" placeholder="Room#/Location"></v-text-field>
+              <v-text-field
+                prepend-icon="mdi-map-marker"
+                v-model="SaveRequest.location"
+                placeholder="Room#/Location"
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-textarea
                 label="Problem Description"
                 auto-grow
                 outlined
+                v-model="SaveRequest.problem_description"
                 rows="3"
                 row-height="25"
                 shaped
@@ -91,10 +97,10 @@
             <!-- TODO:Priority -->
             <v-col cols="12">
               <v-col cols="6">Priority</v-col>
-              <v-radio-group v-model="row" row>
+              <v-radio-group v-model="SaveRequest.priority" row>
                 <v-radio color="red" label="High" value="high"></v-radio>
                 <v-radio color="green" label="Medium" value="medium"></v-radio>
-                <v-radio color="yellow" label="Low" value="low"></v-radio>
+                <v-radio color="yellow" label="Low" value="low"  ></v-radio>
               </v-radio-group>
             </v-col>
             <!-- <v-col cols="6">
@@ -114,7 +120,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn text color="primary" @click="dialog = false">Cancel</v-btn>
-          <v-btn text @click="dialog = false">Save</v-btn>
+          <v-btn text @click="save">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -144,11 +150,13 @@ export default {
         { text: "Created_at", value: "created_at" }
       ],
       SaveRequest: {
-        name: "",
-        email: "",
+        requestnumber: "",
+        department: "",
+        location: "",
+        Problem_Description: "",
+        priority: ""
       },
-      tableData: [],
-    
+      tableData: []
     };
   },
   created() {
@@ -168,7 +176,36 @@ export default {
       if (priority == "Medium") return "green";
       if (priority == "Low") return "orange";
     },
+
+    save()
+    {
+      axios
+          .post("/api/request", this.SaveRequest)
+          .then(response =>this.alertandpush("Request Was Created", this.SaveRequest))
+          .catch(function(error) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              footer:
+                "Try to insert field correctly <br/> and make sure the email is not Duplicate"
+            });
+          });
+    },
+     alertandpush(item, editedItem) {
+      if (editedItem != null) {
+        this.tableData.push(editedItem);
+      }
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: item,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    },
     myFunction: function() {
+     
       var idStrLen = 8;
       // always start with a letter -- base 36 makes for a nice shortcut
       var idStr = Math.floor(Math.random() * 25) + 10;
@@ -178,7 +215,8 @@ export default {
       do {
         idStr += Math.floor(Math.random() * 35).toString(36);
       } while (idStr.length < idStrLen);
-      this.randomNumber = idStr;
+      this.randomNumber = idStr.toString().slice(0, 8);
+       this.SaveRequest.requestnumber = idStr.toString().slice(0, 8);
     }
   }
 };

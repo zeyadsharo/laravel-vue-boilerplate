@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\API;
  use App\Http\Controllers\Controller;
 // namespace App\Http\Controllers\Auth;
-// use Illuminate\Http\Request\;
+use Illuminate\Http\Request;
 use App\User;
-use App\Request;
- use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Auth;
+// use App\Requests;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\RequestResource;
+use Illuminate\Database\Eloquent\Model;
+
 // use AuthenticatesUsers;
 class RequestController extends Controller
 {
@@ -20,7 +21,7 @@ class RequestController extends Controller
      */
     public function index()
     {
-         $id=Auth::id();
+     $id=Auth::id();
        return RequestResource::collection(User::find($id)->requests);
     }
 
@@ -32,8 +33,18 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+    //    $requestrt= new Requests([
+    //     'requestnumber'=> $request->requestnumber,
+    //     'department'=> $request->department,
+    //     'location'=>$request->location,
+    //     'problem_description'=>$request->problem_description,
+    //     'priority'=>$request->priority,
+    //     ]);
+   
+    //     $user=User::find(Auth::id());
+    //  return $user->requests()->save($requestrt);
+     
+   }
 
     /**
      * Display the specified resource.
@@ -69,3 +80,4 @@ class RequestController extends Controller
         //
     }
 }
+?>

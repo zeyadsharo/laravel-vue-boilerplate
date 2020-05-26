@@ -24,7 +24,8 @@ Route::get('/mark-all-read/{user}', function (User $user) {
     $user->unreadNotifications->markAsRead();
     return response(['message'=>'done', 'notifications'=>$user->notifications]);
 });
-
+ Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+ Route::get('/callback/{provider}', 'SocialController@callback');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

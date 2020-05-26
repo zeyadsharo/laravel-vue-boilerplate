@@ -194,7 +194,7 @@ export default {
   methods: {
     login() {
       axios
-        .get("auth/google")
+        .get("/login")
         .then(Response => (window.location.href = "home"));
     }
   }

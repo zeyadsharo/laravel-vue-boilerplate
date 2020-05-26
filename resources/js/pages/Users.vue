@@ -155,7 +155,7 @@
         </template>
         <template v-slot:item.role="{ item }">
           <v-chip :color="getColor(item.role.name)" dark>{{ item.role.name }}</v-chip>
-        </template>
+        </template> -->
         <template v-slot:item.role="{ item }">
           <v-chip :color="getColor(item.role.name)" dark>{{ item.role.name }}</v-chip>
         </template>
@@ -234,6 +234,7 @@ export default {
     editedIndex: -1,
     allRoles: [],
     allPermissions: [],
+
     editedItem: {
       name: "",
       email: "",
@@ -268,7 +269,7 @@ export default {
 
   methods: {
     initialize() {
-      axios.get("/api/request").then(response => {
+      axios.get("/api/users").then(response => {
         this.tableData = response.data.data;
       });
 
