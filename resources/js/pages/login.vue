@@ -9,7 +9,6 @@
 
       <v-content>
         <v-container class="fill-height" fluid>
-         
           <v-row justify="center" no-gutters>
             <v-col cols="12" sm="12">
               <v-hover v-slot:default="{ hover }" open-delay="200">
@@ -20,14 +19,12 @@
                   <v-spacer />
                   <v-card align-center class="mx-auto" height="400" max-width="850">
                     <iframe
-                      align-center
                       width="850"
                       height="400"
                       src="https://www.youtube.com/embed/mpKd7BzNtZg"
                       frameborder="0"
-                      allow="autoplay; encrypted-media"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                       allowfullscreen
-                      rounded
                     ></iframe>
                   </v-card>
                 </v-card>

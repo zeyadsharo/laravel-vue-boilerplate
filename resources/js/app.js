@@ -65,7 +65,7 @@ import Request from "./workflow/requests";
 import History from "./workflow/history";
 import Inprogress from "./workflow/inprogress";
 const routes = [
-    
+
     {
         path: "/home/requests",
         component: Request
@@ -78,7 +78,7 @@ const routes = [
         path: "/home/inprogress",
         component: Inprogress
     },
-    
+
     {
         path: "/admin/",
         component: Dashboard
@@ -131,12 +131,14 @@ Vue.filter("updateDate", function (update) {
 
 
 
-
+// //Import progressbar
+// require('./progressbar');
 const app = new Vue({
     el: "#app",
     vuetify: Vuetify,
     router,
     components: {
-        login,home
+        login,
+        home
     }
 }).$mount("#app");

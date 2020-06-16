@@ -57,7 +57,7 @@
                       v-on="on"
                     ></v-text-field>
                   </template>
-                  <v-date-picker v-model="date" scrollable>
+                  <v-date-picker readonly v-model="date" scrollable>
                     <v-spacer></v-spacer>
                     <v-btn text color="primary" @click="modal = false">Cancel</v-btn>
                     <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
@@ -68,9 +68,20 @@
 
             <v-col cols="6">
               <v-text-field
+            
                 prepend-icon="mdi-account-card-details-outline"
                 placeholder="Requested By"
+                v-model="ff"
               ></v-text-field>
+            </v-col>
+            <v-col class="d-flex" cols="12" sm="6">
+              <!-- TODO: Faculty-->
+              <v-select
+                :items="Faculty"
+                prepend-icon="mdi-school"
+                label="select Faculty or Collage"
+                solo
+              ></v-select>
             </v-col>
             <v-col class="d-flex" cols="12" sm="6">
               <v-select
@@ -81,6 +92,7 @@
                 solo
               ></v-select>
             </v-col>
+
             <v-col cols="6">
               <v-text-field
                 prepend-icon="mdi-map-marker"
@@ -143,9 +155,18 @@ export default {
       menu2: false,
       row: null,
       randomNumber: "324",
-
+      ff: "zeyad sharo",
       search: "",
       dialog: false,
+      Faculty: [
+        { text: "Faculty of Science", id: 1 },
+        { text: "Faculty of Humanities", id: 2 },
+        { text: "Faculty of Education", id: 3 },
+        { text: "College of Medicine", id: 4 },
+        { text: "College of Engineering", id: 5 },
+        { text: "College of Basic Education", id: 6 },
+        { text: "College of Administration & Economics", id: 7 }
+      ],
       headers: [
         { text: "Request number", value: "requestnumber" },
         { text: "Department", value: "department" },
@@ -159,7 +180,8 @@ export default {
         department: "",
         location: "",
         Problem_Description: "",
-        priority: ""
+        priority: "",
+        created_at:"",
       },
       tableData: []
     };
