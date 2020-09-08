@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\User;
+use App\Faculty;
+use App\Department;
 class PermissionSeeder extends Seeder
 {
     /**
@@ -49,5 +51,30 @@ class PermissionSeeder extends Seeder
 $user = factory(User::class)->create(['name'=>'zeyad sharo' ,'email_verified_at'=>Carbon::now()->toDateTimeString(),
 'email'=>'zeyadsharo85@gmail.com','password'=>bcrypt('4325775735')]);
 $user->assignRole('super-admin');
+Faculty::create(['name'=>'Faculty of Science']);
+  $faclity=Faculty::find(1);
+$sicence = array(
+"Department of Biology",
+"Department of Chemistry",
+"Department of Computer Science","
+Department of Environmental Sciences",
+"Department of Mathematics",
+"Department of Physics"
+);
+// foreach ($sicence as $value) {
+//   $dept=Department::create(['name' => $value]);
+//      $faclity->departments()->save($dept);
+// }
+
+
+
+
+
+
+
+
+
+
+
     }
 }

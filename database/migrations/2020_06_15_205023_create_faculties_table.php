@@ -15,9 +15,13 @@ class CreateFacultiesTable extends Migration
     {
         Schema::create('faculties', function (Blueprint $table) {
             $table->id();
+         //  $table->unsignedBigInteger('request_id');
             $table->string('name');
             $table->timestamps();
         });
+        //  Schema::table('faculties', function($table) {
+        //  $table->foreign('request_id')->references('id')->on('requests');
+        //  });
     }
 
     /**

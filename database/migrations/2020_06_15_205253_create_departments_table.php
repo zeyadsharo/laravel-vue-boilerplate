@@ -17,7 +17,7 @@ class CreateDepartmentsTable extends Migration
             $table->increments('id', true);
             $table->string('name');
             $table->unsignedBigInteger('facultiy_id');
-            $table->timestamps();
+             $table->timestamps();
         });
          Schema::table('departments', function($table) {
          $table->foreign('facultiy_id')->references('id')->on('faculties');

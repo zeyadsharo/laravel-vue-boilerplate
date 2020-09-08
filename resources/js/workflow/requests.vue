@@ -18,6 +18,9 @@
       <template v-slot:item.problem_description="{ item }">
         <v-btn text small color="primary" @click="ShowText(item.problem_description)">show des...</v-btn>
       </template>
+        <template slot="Faclity">
+          <p> {{Faclity}}</p>
+        </template>
       <template slot="no-data">
         <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
@@ -68,7 +71,6 @@
 
             <v-col cols="6">
               <v-text-field
-            
                 prepend-icon="mdi-account-card-details-outline"
                 placeholder="Requested By"
                 v-model="ff"
@@ -80,6 +82,7 @@
                 :items="Faculty"
                 prepend-icon="mdi-school"
                 label="select Faculty or Collage"
+                v-model="Faclity"
                 solo
               ></v-select>
             </v-col>
@@ -173,7 +176,7 @@ export default {
         { text: "Location", value: "location" },
         { text: "Problem_Description", value: "problem_description" },
         { text: "Priority", value: "priority" },
-        { text: "Created_at", value: "created_at" }
+        { text: "Created_at", value: "created_at" },
       ],
       SaveRequest: {
         requestnumber: "",
@@ -181,7 +184,8 @@ export default {
         location: "",
         Problem_Description: "",
         priority: "",
-        created_at:"",
+        Faclity: "",
+        created_at: ""
       },
       tableData: []
     };
@@ -200,8 +204,8 @@ export default {
     },
     getColor(priority) {
       if (priority === "High") return "red";
-      if (priority == "Medium") return "green";
-      if (priority == "Low") return "orange";
+      if (priority === "Medium") return "green";
+      if (priority === "Low") return "orange";
     },
 
     save() {

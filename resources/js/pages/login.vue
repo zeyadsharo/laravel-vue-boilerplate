@@ -35,7 +35,7 @@
           <v-row>
             <v-col cols="12" sm="12">
               <v-card align-center class="mx-auto" width="850">
-                <v-btn rounded align-center block color="success" dark @click="login">
+                <v-btn rounded align-center block color="success" dark  href="/redirect">
                   <v-icon color="blue darken-2">mdi-google</v-icon>Login
                 </v-btn>
               </v-card>
@@ -66,18 +66,18 @@
 <script>
 export default {
   props: {
-    source: String
+    source: String,
   },
 
   data: () => ({
     drawer: null,
-    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"]
+    links: ["Home", "About Us", "Team", "Services", "Blog", "Contact Us"],
   }),
 
   methods: {
     login() {
-      axios.get("/login").then(Response => (window.location.href = "home"));
-    }
-  }
+      axios.get("/login").then((Response) => (window.location.href = "home"));
+    },
+  },
 };
 </script>

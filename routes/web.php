@@ -16,7 +16,7 @@
 Route::get('/', function () {
     return view('layouts.home');
 });
-  
+
  Route::get('auth/google', 'Auth\LoginController@redirectToGoogle');
   Route::get('auth/google/callback', 'Auth\LoginController@handleGoogleCallback');
 Auth::routes();
@@ -46,3 +46,6 @@ Route::get('/home/{any}', 'API\HomeController@index')->where('any', '.*');
 // Sharo','Remarks'=>'sdfdsfdsf','date_completed'=>Carbon::today()->toDateString()]);
 // $user->requests()->save($request);
 // });
+
+Route::get('/redirect', 'SocialAuthGoogleController@redirect');
+Route::get('/callback', 'SocialAuthGoogleController@callback');
