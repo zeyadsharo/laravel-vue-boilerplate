@@ -14,14 +14,13 @@
           <v-spacer></v-spacer>
           <v-toolbar-title>Maintenace System Home</v-toolbar-title>
           <v-spacer></v-spacer>
-          <!-- <v-btn icon>
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>-->
 
           <v-btn icon>
             <v-icon color="red" @click="logout">mdi-logout</v-icon>
           </v-btn>
-
+          <v-btn icon @click="changeRTL">
+            <v-icon color="red" >mdi-power</v-icon>
+          </v-btn>
           <template v-slot:extension>
             <v-tabs v-model="activeTab" centered slider-color="yellow">
               <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.route" exact>{{ tab.name }}</v-tab>
@@ -54,7 +53,7 @@
 <script>
 export default {
   props: {
-    source: String
+    source: String,
   },
   data: () => ({
     drawer: null,
@@ -62,14 +61,19 @@ export default {
     tabs: [
       { id: 1, name: "Requests", route: `/home/requests` },
       { id: 2, name: "History", route: `/home/history` },
-      { id: 3, name: "in Process", route: `/home/inprogress` }
-    ]
+      { id: 3, name: "in Process", route: `/home/inprogress` },
+    ],
   }),
   methods: {
     logout() {
-      axios.post("/logout").then(Response => (window.location.href = "/"));
-    }
+      axios.post("/logout").then((Response) => (window.location.href = "/"));
+    },
+    changeRTL() {
+      this.$vuetify.rtl = true;
+    },
   },
-  props: ["user"]
+  props: ["user"],
 };
 </script>
+
+
