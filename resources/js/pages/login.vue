@@ -35,12 +35,15 @@
           <v-row>
             <v-col cols="12" sm="12">
               <v-card align-center class="mx-auto" width="850">
-                <v-btn rounded align-center block color="success" dark  href="/redirect">
+                <v-btn rounded align-center block color="success" dark href="/redirect">
                   <v-icon color="blue darken-2">mdi-google</v-icon>Login
                 </v-btn>
               </v-card>
             </v-col>
           </v-row>
+          <v-btn  rounded align-center block color="success" dark @click="increment">
+            <v-icon color="blue darken-2">mdi-google</v-icon>{{count}}
+          </v-btn>
         </v-container>
       </v-content>
       <v-footer color="primary lighten-1" padless>
@@ -78,6 +81,14 @@ export default {
     login() {
       axios.get("/login").then((Response) => (window.location.href = "home"));
     },
+    increment() {
+      console.log(this.$store.state.count);
+    },
   },
+   computed: {
+        count () {
+            return this.$store.state.count
+        }
+    }
 };
 </script>

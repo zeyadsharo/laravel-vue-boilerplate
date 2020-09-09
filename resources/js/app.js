@@ -29,6 +29,8 @@ import 'vuetify/src/styles/main.sass'
 
 import Vuetify from '../plugins/vuetify'
 import VueRouter from "vue-router";
+import Store from '../store/index'
+
 // Vue.use(Vuetify);
 Vue.use(VueRouter);
 import "vuetify/dist/vuetify.min.css";
@@ -136,6 +138,7 @@ Vue.filter("updateDate", function (update) {
 const app = new Vue({
     el: "#app",
     vuetify: Vuetify,
+    store: Store,
     router,
     components: {
         login,
