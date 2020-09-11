@@ -1,54 +1,19 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-//for swwet alert
-
 import Swal from "sweetalert2";
 window.Swal = Swal;
-
-
-
-//for moment time
 import moment from "moment";
-
 require("./bootstrap");
 require("../sass/app.scss");
 import Vue from "vue";
-//  import Vuetify from "vuetify/lib";
-// export default new Vuetify();
 Vue.use(Vuetify);
-
-
 window.Vue = require("Vue");
-// import Vuetify from "vuetify";
-// import Vuetify from 'vuetify/lib';
 import 'vuetify/src/styles/main.sass'
-
 import Vuetify from '../plugins/vuetify'
 import VueRouter from "vue-router";
 import Store from '../store/index'
-
-// Vue.use(Vuetify);
 Vue.use(VueRouter);
 import "vuetify/dist/vuetify.min.css";
 import Auth from "./auth";
-
 Vue.prototype.$auth = new Auth(window.user);
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-import login from "./pages/login.vue";
-import home from "./pages/home.vue";
 Vue.component(
     "example-component",
     require("./components/ExampleComponent.vue").default
@@ -56,69 +21,7 @@ Vue.component(
 Vue.component("admin", require("./components/Admin.vue").default);
 Vue.component("login", require("./pages/login.vue").default);
 Vue.component("home", require("./pages/home.vue").default);
-import Dashboard from "./pages/Dashboard";
-import Settings from "./pages/Settings";
-import Users from "./pages/Users";
-import Roles from "./pages/Roles";
-import Permissions from "./pages/Permissions";
-import Activities from "./pages/Activities";
 
-import Request from "./workflow/requests";
-import History from "./workflow/history";
-import Inprogress from "./workflow/inprogress";
-const routes = [
-
-    {
-        path: "/home/requests",
-        component: Request
-    },
-    {
-        path: "/home/history",
-        component: History
-    },
-    {
-        path: "/home/inprogress",
-        component: Inprogress
-    },
-
-    {
-        path: "/admin/",
-        component: Dashboard
-    },
-    {
-        path: "/admin/users",
-        component: Users
-    },
-    {
-        path: "/admin/roles",
-        component: Roles
-    },
-    {
-        path: "/admin/permissions",
-        component: Permissions
-    },
-    {
-        path: "/admin/settings",
-        component: Settings
-    },
-    {
-        path: "/admin/activities",
-        component: Activities
-    }
-];
-
-const router = new VueRouter({
-    mode: "history",
-    routes
-});
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-//filter
 Vue.filter("upText", function (text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
 });
@@ -133,15 +36,34 @@ Vue.filter("updateDate", function (update) {
 
 
 
-// //Import progressbar
-// require('./progressbar');
+import login from "./pages/login.vue";
+import home from "./pages/home.vue";
+import router from "../plugins/router"
+
+import i18n from '../plugins/i18n'
+Vue.config.productionTip = false
+// router.beforeEach((to, from, next) => {
+
+//     // use the language from the routing param or default language
+//     let language = to.params.lang;
+//     if (!language) {
+//         language = 'en'
+//     }
+
+//     // set the current language for i18n.
+//     i18n.locale = language
+//     next()
+// })
+
+
 const app = new Vue({
     el: "#app",
     vuetify: Vuetify,
     store: Store,
     router,
+    i18n,
     components: {
         login,
         home
-    }
+    },
 }).$mount("#app");

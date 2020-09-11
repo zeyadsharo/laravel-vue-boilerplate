@@ -12,18 +12,18 @@
           </v-badge>
           {{user.name}}
           <v-spacer></v-spacer>
-          <v-toolbar-title>Maintenace System Home</v-toolbar-title>
+          <v-toolbar-title>{{ $t('system') }}</v-toolbar-title>
           <v-spacer></v-spacer>
-
+         <languageswitcher/>
           <v-btn icon>
             <v-icon color="red" @click="logout">mdi-logout</v-icon>
           </v-btn>
-          <v-btn icon @click="changeRTL">
-            <v-icon color="red" >mdi-power</v-icon>
-          </v-btn>
           <template v-slot:extension>
             <v-tabs v-model="activeTab" centered slider-color="yellow">
-              <v-tab v-for="tab in tabs" :key="tab.id" :to="tab.route" exact>{{ tab.name }}</v-tab>
+              <router-link :to="{name:'Request', params: { lang: `${$i18n.locale}` }}"
+              ><v-tab>{{ $t('tabs.request') }} </v-tab></router-link>
+             <router-link :to="{name:'History', params: { lang: `${$i18n.locale}` }}"
+              ><v-tab>{{ $t('tabs.history') }}</v-tab></router-link>
             </v-tabs>
           </template>
         </v-toolbar>
@@ -42,7 +42,7 @@
         <v-row justify="center" no-gutters>
           <v-col class="primary lighten-1 py-4 text-center white--text" cols="12">
             {{ new Date().getFullYear() }} —
-            <strong>University Of Zakho</strong>
+            <strong>{{ $t('foo.name') }}</strong>
           </v-col>
         </v-row>
       </v-footer>
@@ -51,7 +51,10 @@
 </template>
 
 <script>
+ import languageswitcher from '../components/LanguageSwitcher'
 export default {
+
+  components: {languageswitcher},
   props: {
     source: String,
   },
@@ -59,7 +62,7 @@ export default {
     drawer: null,
     activeTab: 2,
     tabs: [
-      { id: 1, name: "Requests", route: `/home/requests` },
+      { id: 1, name: "Requests", route: "`/${i18n.locale}/home/requests`" },
       { id: 2, name: "History", route: `/home/history` },
       { id: 3, name: "in Process", route: `/home/inprogress` },
     ],
@@ -67,9 +70,6 @@ export default {
   methods: {
     logout() {
       axios.post("/logout").then((Response) => (window.location.href = "/"));
-    },
-    changeRTL() {
-      this.$vuetify.rtl = true;
     },
   },
   props: ["user"],

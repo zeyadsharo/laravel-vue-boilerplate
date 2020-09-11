@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      Requsets
+      {{ $t('Requset.name') }}
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
@@ -148,6 +148,7 @@
 </template>
 
 <script>
+import i18n from '/E disk/Maintenance System/resources/plugins/i18n'
 export default {
   data() {
     return {
@@ -171,7 +172,7 @@ export default {
         { text: "College of Administration & Economics", id: 7 }
       ],
       headers: [
-        { text: "Request number", value: "requestnumber" },
+        { text: this.$t('Requset.RN') , value: "requestnumber" },
         { text: "Department", value: "department" },
         { text: "Location", value: "location" },
         { text: "Problem_Description", value: "problem_description" },

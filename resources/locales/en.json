@@ -1,0 +1,25 @@
+{
+    "message":"Hello i18n !!",
+    "nav":{
+        "home":"home"
+    },
+    "system": "Maintenace System ",
+    "tabs": {
+        "request": "request",
+        "history": "history"
+    },
+    "Requset": {
+        "name": "Request",
+        "RN": "Request number ",
+        "dept": "Department",
+        "loc": "Location",
+        "pd": "problem descriptin ",
+        "p": "priority",
+        "date": "Created_at"
+    }
+    ,
+    "foo": {
+        "name": " Univercity Of Zakho"
+    }
+
+}

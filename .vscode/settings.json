@@ -1,0 +1,7 @@
+{
+    "i18n-ally.localesPaths": [
+        "resources/lang",
+        "resources/locales"
+    ],
+    "compile-hero.disable-compile-files-on-did-save-code": false
+}

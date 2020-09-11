@@ -35,17 +35,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
-Route::get('/home/{any}', 'API\HomeController@index')->where('any', '.*');
-
-// Route::get('/api/request', 'API\RequestController@index');
-// Route::apiResources(['request' => 'API\RequestController']);
-// Route::get('/create', function () {
-// $user= User::findorfail(1);
-// $request=Request::create(['created_at'=>Carbon::today()->toDateString(),'requestnumber'=>123132,
-// 'department'=>'computer','location'=>'zakho','problem_description'=>'sdfdsfdsfdsf','priority'=>'sdfdsfd','completed_by'=>'zeyad
-// Sharo','Remarks'=>'sdfdsfdsf','date_completed'=>Carbon::today()->toDateString()]);
-// $user->requests()->save($request);
-// });
-
-Route::get('/redirect', 'SocialAuthGoogleController@redirect');
+// Route::get('/home/{any}', 'API\HomeController@index')->where('any', '.*');
+// Route::get('{any}/home', 'API\HomeController@index')->where('any', '.*');
+// Route::get('{any}', 'API\HomeController@index')->where('any', '.*');
+Route::get('{any}/requests', 'API\HomeController@index')->where('any', '.*');
+Route::get('{any}/history', 'API\HomeController@index')->where('any', '.*');
+Route::get('/googlelogin', 'SocialAuthGoogleController@redirect');
 Route::get('/callback', 'SocialAuthGoogleController@callback');
