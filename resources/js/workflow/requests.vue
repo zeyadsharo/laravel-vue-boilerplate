@@ -6,10 +6,10 @@
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
-        label="Search"
+
         single-line
         hide-details
-      ></v-text-field>
+      > {{ $t('Requset.search') }}</v-text-field>
     </v-card-title>
     <v-data-table :headers="headers" :items="tableData" class="elevation-1">
       <template v-slot:item.priority="{ item }">
@@ -18,9 +18,9 @@
       <template v-slot:item.problem_description="{ item }">
         <v-btn text small color="primary" @click="ShowText(item.problem_description)">show des...</v-btn>
       </template>
-        <template slot="Faclity">
-          <p> {{Faclity}}</p>
-        </template>
+      <template slot="Faclity">
+        <p>{{Faclity}}</p>
+      </template>
       <template slot="no-data">
         <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import i18n from '/E disk/Maintenance System/resources/plugins/i18n'
+import i18n from "/E disk/Maintenance System/resources/plugins/i18n";
 export default {
   data() {
     return {
@@ -169,15 +169,15 @@ export default {
         { text: "College of Medicine", id: 4 },
         { text: "College of Engineering", id: 5 },
         { text: "College of Basic Education", id: 6 },
-        { text: "College of Administration & Economics", id: 7 }
+        { text: "College of Administration & Economics", id: 7 },
       ],
       headers: [
-        { text: this.$t('Requset.RN') , value: "requestnumber" },
-        { text: "Department", value: "department" },
-        { text: "Location", value: "location" },
-        { text: "Problem_Description", value: "problem_description" },
-        { text: "Priority", value: "priority" },
-        { text: "Created_at", value: "created_at" },
+        { text: this.$t("Requset.RN"), value: "requestnumber" },
+        { text: this.$t("Requset.dept"), value: "department" },
+        { text: this.$t("Requset.loc"), value: "location" },
+        { text: this.$t("Requset.pd"), value: "problem_description" },
+        { text: this.$t("Requset.p"), value: "priority" },
+        { text: this.$t("Requset.date"), value: "created_at" },
       ],
       SaveRequest: {
         requestnumber: "",
@@ -186,13 +186,14 @@ export default {
         Problem_Description: "",
         priority: "",
         Faclity: "",
-        created_at: ""
+        created_at: "",
       },
-      tableData: []
+      tableData: [],
     };
   },
   created() {
     this.initialize();
+    headers
   },
   methods: {
     initialize() {
@@ -212,16 +213,16 @@ export default {
     save() {
       axios
         .post("/api/request", this.SaveRequest)
-        .then(response =>
+        .then((response) =>
           this.alertandpush("Request Was Created", this.SaveRequest)
         )
-        .catch(function(error) {
+        .catch(function (error) {
           Swal.fire({
             icon: "error",
             title: "Oops...",
             text: "Something went wrong!",
             footer:
-              "Try to insert field correctly <br/> and make sure the email is not Duplicate"
+              "Try to insert field correctly <br/> and make sure the email is not Duplicate",
           });
         });
     },
@@ -234,11 +235,11 @@ export default {
         icon: "success",
         title: item,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
       this.dialog = false;
     },
-    myFunction: function() {
+    myFunction: function () {
       var idStrLen = 8;
       // always start with a letter -- base 36 makes for a nice shortcut
       var idStr = Math.floor(Math.random() * 25) + 10;
@@ -250,7 +251,7 @@ export default {
       } while (idStr.length < idStrLen);
       this.randomNumber = idStr.toString().slice(0, 8);
       this.SaveRequest.requestnumber = idStr.toString().slice(0, 8);
-    }
-  }
+    },
+  },
 };
 </script>

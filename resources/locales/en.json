@@ -15,7 +15,8 @@
         "loc": "Location",
         "pd": "problem descriptin ",
         "p": "priority",
-        "date": "Created_at"
+        "date": "Created_at",
+        "search":"search"
     }
     ,
     "foo": {
